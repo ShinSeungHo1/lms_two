@@ -1,0 +1,250 @@
+/* SurveyForm.css */
+
+.survey-container {
+  max-width: 800px;
+  width: 100%; /* 추가: 전체 너비 사용 */
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; /* 추가: 패딩 포함 박스 크기 계산 */
+}
+
+.survey-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.survey-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+  text-align: center;
+}
+
+.survey-content {
+  space-y: 2rem;
+}
+
+/* 질문 섹션 */
+.question-section {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+}
+
+.question-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.5;
+}
+
+/* 라디오 버튼 그룹 */
+.radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.radio-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-right: 1rem;
+}
+
+.radio-input {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid #d1d5db;
+  border-radius: 50%;
+  appearance: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+}
+
+.radio-input:checked {
+  border-color: #3b82f6;
+  background-color: #3b82f6;
+}
+
+.radio-input:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.375rem;
+  height: 0.375rem;
+  background-color: #ffffff;
+  border-radius: 50%;
+}
+
+.radio-input:hover {
+  border-color: #9ca3af;
+}
+
+.radio-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.radio-label {
+  font-size: 0.875rem;
+  color: #374151;
+  cursor: pointer;
+  user-select: none;
+  line-height: 1.25;
+}
+
+.radio-label:hover {
+  color: #111827;
+}
+
+/* 기타 입력 필드 */
+.other-input-section {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.other-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  font-size: 0.875rem;
+  color: #374151;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.other-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.other-input::placeholder {
+  color: #9ca3af;
+}
+
+/* 버튼 섹션 */
+.button-section {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.btn {
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  min-width: 100px;
+}
+
+.btn-primary {
+  background-color: #3b82f6;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: #2563eb;
+}
+
+.btn-primary:active {
+  background-color: #1d4ed8;
+}
+
+.btn-secondary {
+  background-color: #6b7280;
+  color: #ffffff;
+}
+
+.btn-secondary:hover {
+  background-color: #4b5563;
+}
+
+.btn-secondary:active {
+  background-color: #374151;
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .survey-container {
+    padding: 1rem;
+    margin: 1rem;
+  }
+
+  .radio-group {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .radio-item {
+    margin-right: 0;
+  }
+
+  .button-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .survey-title {
+    font-size: 1.25rem;
+  }
+
+  .question-title {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .survey-container {
+    padding: 0.75rem;
+  }
+
+  .question-section {
+    padding: 1rem;
+  }
+
+  .radio-item {
+    gap: 0.375rem;
+  }
+
+  .radio-input {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+
+  .radio-label {
+    font-size: 0.8rem;
+  }
+}

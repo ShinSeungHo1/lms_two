@@ -2,24 +2,21 @@
 import router from '@/router';
 import { useModalState } from '@/stores/modalState';
 import { onMounted, ref } from 'vue';
+import { useUserInfo } from '@/stores/loginInfoState';
 
-const select = ref('title');
+const { user } = useUserInfo();
+
+const modalState = useModalState();
+const selectType = ref('title');
 const inputText = ref('');
-// const searchTitle = ref('');
-// const searchWriter = ref('');
-const modalState = useModalState(); // 함수 실행 잊지 말기!
 
 const handlerSearch = () => {
   const query = [];
+  if (selectType.value === 'title') !selectType.value || query.push(`title=${inputText.value}`);
+  else if (selectType.value === 'writer')
+    !selectType.value || query.push(`writer=${inputText.value}`);
 
-  if (select.value === 'title' && inputText.value) {
-    query.push(`title=${inputText.value}`);
-  } else if (select.value === 'writer' && inputText.value) {
-    query.push(`writer=${inputText.value}`);
-  }
-
-  const queryString = query.length > 0 ? `?${query.join('&')}` : '';
-
+  const queryString = query.length > 0 ? `?${query}` : '';
   router.push(queryString);
 };
 
@@ -31,13 +28,18 @@ onMounted(() => {
 <template>
   <div class="qna-container">
     <div class="input-box">
-      <select v-model="select">
+      <select v-model="selectType">
         <option value="title">제목</option>
         <option value="writer">작성자</option>
       </select>
       <input v-model="inputText" type="text" />
       <button @click="handlerSearch">검색</button>
-      <button @click="modalState.$patch({ isOpen: true })">신규</button>
+      <button
+        v-if="user.userType === 'S'"
+        @click="modalState.$patch({ isOpen: true, type: 'create' })"
+      >
+        신규
+      </button>
     </div>
   </div>
 </template>

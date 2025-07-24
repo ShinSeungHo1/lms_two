@@ -1,45 +1,58 @@
 <script setup>
 import PageNavigation from '@/components/common/PageNavigation.vue';
-import { useModalState } from '@/stores/modalState';
-import { ref } from 'vue';
-import { useRoute } from 'vue-router';
-import { onMounted } from 'vue';
-import { watch } from 'vue';
-import axios from 'axios';
 import LearningMaterialsModal from '../LearningMaterialsModal/LearningMaterialsModal.vue';
+import { useModalState } from '@/stores/modalState';
+import axios from 'axios';
+import { onMounted, ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
 const route = useRoute();
-const learningMaterialsList = ref([]); // ref([])에서 []는 초깃값이고, 빈 배열로 시작하되 나중에 목록 데이터를 넣겠다는 의도
-const learningMaterialsCount = ref(0);
+
 const modalState = useModalState();
-const detailId = ref(0);
 
-const learningMaterialsSearch = (cPage = 1) => {
-  const param = new URLSearchParams(route.query);
-  param.append('currentPage', cPage);
-  param.append('pageSize', 5);
+const mtrList = ref([]);
+const mtrCnt = ref(0);
+const lectures = ref([]);
 
-  axios.post('/api/support/getMtrListBody.do', param).then((res) => {
-    learningMaterialsList.value = res.data.list;
-    learningMaterialsCount.value = res.data.count;
+const mtrIdForDetail = ref(0);
+const lecIdForDetail = ref(0);
+const lecNameForDetail = ref('');
+
+const handlerSearchMtrList = (cPage = 1) => {
+  const params = {
+    currentPage: cPage,
+    pageSize: 5,
+    ...route.query,
+  };
+
+  const urlParam = new URLSearchParams(params);
+
+  axios.post('/api/support/getMtrListBody.do', urlParam).then((res) => {
+    console.log('MtrList 불러오기 성공!');
+    console.log(res);
+    mtrList.value = res.data.mtrList;
+    mtrCnt.value = res.data.mtrCnt;
+    lectures.value = res.data.lectures;
   });
 };
 
-onMounted(() => {
-  learningMaterialsSearch();
-});
-
-const learningMaterialsDetail = (id) => {
-  modalState.$patch({ isOpen: true });
-  detailId.value = id;
+const handlerDetailModal = (mtrId, lecId, lecName) => {
+  modalState.$patch({ isOpen: true, type: 'detailMtr' });
+  mtrIdForDetail.value = mtrId;
+  lecIdForDetail.value = lecId;
+  lecNameForDetail.value = lecName;
 };
 
 watch(
   () => route.query,
   () => {
-    learningMaterialsSearch();
+    handlerSearchMtrList();
   },
 );
+
+onMounted(() => {
+  handlerSearchMtrList();
+});
 </script>
 
 <template>
@@ -54,21 +67,17 @@ watch(
         </tr>
       </thead>
       <tbody>
-        <template v-if="learningMaterialsCount > 0">
-          <tr
-            v-for="learningMaterials in learningMaterialsList"
-            :key="learningMaterials.materiId"
-            class="learningMaterials-table-row"
-          >
-            <td class="learningMaterials-cell">{{ learningMaterials.lecName }}</td>
-            <td class="learningMaterials-cell">{{ learningMaterials.loginId }}</td>
+        <template v-if="mtrCnt > 0">
+          <tr v-for="mtr in mtrList" :key="mtr.materiId" class="learningMaterials-table-row">
+            <td class="learningMaterials-cell">{{ mtr.lecName }}</td>
+            <td class="learningMaterials-cell">{{ mtr.loginId }}</td>
             <td
               class="learningMaterials-cell cursor-pointer hover:underline"
-              @click="learningMaterialsDetail(learningMaterials.materiId)"
+              @click="handlerDetailModal(mtr.materiId, mtr.lecId, mtr.lecName)"
             >
-              {{ learningMaterials.materiTitle }}
+              {{ mtr.materiTitle }}
             </td>
-            <td class="learningMaterials-cell">{{ learningMaterials.materiDate }}</td>
+            <td class="learningMaterials-cell">{{ mtr.materiDate }}</td>
           </tr>
         </template>
         <template v-else>
@@ -79,16 +88,23 @@ watch(
       </tbody>
     </table>
     <PageNavigation
-      :total-items="learningMaterialsCount"
+      :total-items="mtrCnt"
       :items-per-page="5"
-      :on-page-change="learningMaterialsSearch"
+      :on-page-change="handlerSearchMtrList"
     />
   </div>
   <LearningMaterialsModal
-    v-if="modalState.isOpen"
-    :detail-id="detailId"
-    @post-success="learningMaterialsSearch()"
-    @un-mounted-modal="detailId = $event"
+    v-if="modalState.type === 'detailMtr' && modalState.isOpen"
+    :mtr-id="mtrIdForDetail"
+    :lec-id="lecIdForDetail"
+    :lec-name="lecNameForDetail"
+    :lecture-list="lectures"
+    @success="handlerSearchMtrList"
+  />
+  <LearningMaterialsModal
+    v-if="modalState.type === 'createMtr' && modalState.isOpen"
+    :lecture-list="lectures"
+    @success="handlerSearchMtrList"
   />
 </template>
 
