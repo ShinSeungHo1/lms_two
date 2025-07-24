@@ -28,7 +28,7 @@ onMounted(() => {
 });
 
 const noticeDetail = (id) => {
-  modalState.$patch({ isOpen: true });
+  modalState.$patch({ isOpen: true, type: 'detailNotice' });
   detailId.value = id;
 };
 
@@ -75,7 +75,7 @@ watch(
     <PageNavigation :total-items="noticeCount" :items-per-page="5" :on-page-change="noticeSearch" />
   </div>
   <NoticeModal
-    v-if="modalState.isOpen"
+    v-if="modalState.type === 'detailNotice' && modalState.isOpen"
     :detail-id="detailId"
     @post-success="noticeSearch()"
     @un-mounted-modal="detailId = $event"

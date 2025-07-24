@@ -1,6 +1,11 @@
 <script setup>
 import router from '@/router';
 import { onMounted, ref } from 'vue';
+import { useUserInfo } from '@/stores/loginInfoState';
+import { useModalState } from '@/stores/modalState';
+
+const { user } = useUserInfo();
+const modalState = useModalState();
 
 const select = ref('title');
 const inputText = ref('');
@@ -8,15 +13,15 @@ const inputText = ref('');
 const handlerSearch = () => {
   const query = [];
 
-  if (select.value === 'title' && inputText.value) {
-    query.push(`title=${inputText.value}`);
-  } else if (select.value === 'writer' && inputText.value) {
-    query.push(`writer=${inputText.value}`);
-  }
-
-  const queryString = query.length > 0 ? `?${query.join('&')}` : '';
+  !select.value ||
+    query.push(select.value === 'title' ? `title=${inputText.value}` : `writer=${inputText.value}`);
+  const queryString = query.length > 0 ? `?${query}` : '';
 
   router.push(queryString);
+};
+
+const createMtrModal = () => {
+  modalState.$patch({ isOpen: true, type: 'createMtr' });
 };
 
 onMounted(() => {
@@ -31,8 +36,9 @@ onMounted(() => {
         <option value="title">제목</option>
         <option value="writer">작성자</option>
       </select>
-      <input v-model="inputText" type="text" />
+      <input v-model.lazy="inputText" type="text" />
       <button @click="handlerSearch">검색</button>
+      <button v-if="user.userType === 'T'" @click="createMtrModal">신규</button>
     </div>
   </div>
 </template>

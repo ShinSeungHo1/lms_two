@@ -1,37 +1,42 @@
 <script setup>
 import PageNavigation from '@/components/common/PageNavigation.vue';
-import { useModalState } from '@/stores/modalState';
-import { ref } from 'vue';
-import { useRoute } from 'vue-router';
 import QnaModal from '../QnaModal/QnaModal.vue';
-import { onMounted } from 'vue';
-import { watch } from 'vue';
+import { useModalState } from '@/stores/modalState';
 import axios from 'axios';
+import { onMounted, ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
-const route = useRoute();
-const qnaList = ref([]); // ref([])에서 []는 초깃값이고, 빈 배열로 시작하되 나중에 목록 데이터를 넣겠다는 의도
-const qnaCount = ref(0);
 const modalState = useModalState();
-const detailId = ref(0);
+
+const qnaId = ref(0);
+
+const qnaList = ref([]);
+const qnaCount = ref(0);
+const route = useRoute();
 
 const qnaSearch = (cPage = 1) => {
-  const param = new URLSearchParams(route.query);
-  param.append('currentPage', cPage);
-  param.append('pageSize', 5);
+  const params = {
+    currentPage: cPage,
+    pageSize: 5,
+    ...route.query,
+  };
 
-  axios.post('/api/support/getQnaListBody.do', param).then((res) => {
-    qnaList.value = res.data.list;
-    qnaCount.value = res.data.count;
-  });
+  const urlParam = new URLSearchParams(params);
+  axios
+    .post('/api/support/getQnaListBody.do', urlParam)
+    .then((res) => {
+      console.log(res);
+      qnaList.value = res.data.list;
+      qnaCount.value = res.data.count;
+    })
+    .catch((err) => {
+      console.log('QnA List 불러오기 실패 : ' + err);
+    });
 };
 
-onMounted(() => {
-  qnaSearch();
-});
-
-const qnaDetail = (id) => {
-  modalState.$patch({ isOpen: true });
-  detailId.value = id;
+const updateQna = (id) => {
+  modalState.$patch({ isOpen: true, type: 'update' });
+  qnaId.value = id;
 };
 
 watch(
@@ -40,6 +45,9 @@ watch(
     qnaSearch();
   },
 );
+onMounted(() => {
+  qnaSearch();
+});
 </script>
 
 <template>
@@ -59,7 +67,7 @@ watch(
           <tr v-for="qna in qnaList" :key="qna.qnaId" class="qna-table-row">
             <td class="qna-cell">{{ qna.qnaId }}</td>
             <td class="qna-cell">{{ qna.lecName }}</td>
-            <td class="qna-cell cursor-pointer hover:underline" @click="qnaDetail(qna.qnaId)">
+            <td class="qna-cell cursor-pointer hover:underline" @click="updateQna(qna.qnaId)">
               {{ qna.qnaTitle }}
             </td>
             <td class="qna-cell">{{ qna.qnaAnswerDate }}</td>
@@ -76,10 +84,17 @@ watch(
     <PageNavigation :total-items="qnaCount" :items-per-page="5" :on-page-change="qnaSearch" />
   </div>
   <QnaModal
-    v-if="modalState.isOpen"
-    :detail-id="detailId"
-    @post-success="qnaSearch()"
-    @un-mounted-modal="detailId = $event"
+    v-if="modalState.type === 'update' && modalState.isOpen"
+    :qna-id="qnaId"
+    @delete-success="qnaSearch"
+    @save-success="qnaSearch"
+  />
+  <QnaModal
+    v-if="modalState.type === 'create' && modalState.isOpen"
+    @delete-success="qnaSearch"
+    @save-success="qnaSearch"
+    @update-success="qnaSearch"
+    @answer-fail="qnaSearch"
   />
 </template>
 
