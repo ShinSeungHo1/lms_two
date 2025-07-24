@@ -1,0 +1,174 @@
+.company-data {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 20px;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: fit-content;
+  margin: 20px auto 0;
+}
+
+.input-box,
+.date-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  color: #495057;
+  font-size: 14px;
+}
+
+.input-company-name {
+  padding: 8px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #495057;
+  min-width: 200px;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+
+.input-company-name:focus {
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.input-company-name:hover {
+  border-color: #adb5bd;
+}
+
+.input-company-date,
+.input-company-date {
+  padding: 8px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #495057;
+  min-width: 140px;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+
+.input-company-date:focus,
+.input-company-date:focus {
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.input-company-date:hover,
+.input-company-date:hover {
+  border-color: #adb5bd;
+}
+
+#search-company,
+#create-company {
+  padding: 8px 20px;
+  border: 1px solid;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  min-width: 80px;
+  height: 38px;
+}
+
+#search-company {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+#search-company:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+}
+
+#search-company:active {
+  background-color: #004085;
+  border-color: #004085;
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 123, 255, 0.3);
+}
+
+#search-company:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+
+#create-company {
+  background-color: #28a745;
+  color: white;
+  border-color: #28a745;
+}
+
+#create-company:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(40, 167, 69, 0.3);
+}
+
+#create-company:active {
+  background-color: #1e7e34;
+  border-color: #1c7430;
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(40, 167, 69, 0.3);
+}
+
+#create-company:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .company-data {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+    width: 95%;
+  }
+
+  .input-box,
+  .date-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .date-box {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .input-company-name,
+  .input-company-date,
+  .input-company-date {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .date-box .input-company-date,
+  .date-box .input-company-date {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  #search-company,
+  #create-company {
+    width: 100%;
+  }
+}

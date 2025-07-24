@@ -1,0 +1,90 @@
+.table-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto 0;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+}
+
+.table-header {
+  background-color: #6c757d;
+  color: white;
+}
+
+.table-header-row {
+  border: none;
+}
+
+.table-header-cell {
+  padding: 12px 16px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  color: white !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+  white-space: nowrap;
+  min-width: 120px;
+}
+
+.table-header-cell:last-child {
+  border-right: none;
+}
+
+.table-body {
+  background-color: white;
+}
+
+.table-body-row {
+  border-bottom: 1px solid #e9ecef;
+  transition: background-color 0.15s ease;
+}
+
+.table-body-row:hover {
+  background-color: #f8f9fa;
+}
+
+.table-body-row:last-child {
+  border-bottom: none;
+}
+
+.table-body-cell {
+  padding: 12px 16px;
+  text-align: center;
+  color: #495057;
+  border-right: 1px solid #e9ecef;
+  white-space: nowrap;
+  min-width: 120px;
+}
+
+.table-body-cell:last-child {
+  border-right: none;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .table-container {
+    width: 95%;
+    margin: 20px auto 0;
+    overflow-x: auto;
+  }
+
+  .table {
+    min-width: 600px;
+  }
+
+  .table-header-cell,
+  .table-body-cell {
+    min-width: 100px;
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+}
