@@ -115,8 +115,6 @@ const qnaDetail = () => {
   axios
     .post('/api/support/qnaDetail.do', urlParam)
     .then((res) => {
-      console.log(`!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!`);
-      console.log(res);
       qnaTitle.value = res.data.qnaTitle;
       qnaContent.value = res.data.qnaContent;
       qnaAnswer.value = res.data.qnaAnswer;

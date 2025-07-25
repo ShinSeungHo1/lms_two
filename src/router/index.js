@@ -14,6 +14,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Commoncode from '@/views/System/Commoncode.vue';
 import Classroom from '@/views/System/Classroom.vue';
 import Equipment from '@/views/System/Equipment.vue';
+import Company from '@/views/System/Company.vue';
 
 import LectureList from '@/views/Lecture/LectureList.vue';
 import LectureManage from '@/views/Lecture/LectureManage.vue';
@@ -133,6 +134,11 @@ const router = createRouter({
               path: 'equipment',
               name: 'equipment',
               component: Equipment,
+            },
+            {
+              path: 'company',
+              name: 'company',
+              component: Company,
             },
           ],
         },
