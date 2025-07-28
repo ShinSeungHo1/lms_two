@@ -1,0 +1,187 @@
+.counsel-search-container {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.counsel-name-input {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.counsel-name-input::before {
+  content: '상담 제목';
+  white-space: nowrap;
+}
+
+.counsel-name {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 180px;
+  height: 40px;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.counsel-name:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.counsel-name::placeholder {
+  color: #9ca3af;
+}
+
+.counsel-date-input {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.counsel-date-input::before {
+  content: '기간';
+  white-space: nowrap;
+}
+
+.counsel-stDate,
+.counsel-edDate {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 140px;
+  height: 40px;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.counsel-stDate:focus,
+.counsel-edDate:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.counsel-between-date {
+  color: #6b7280;
+  font-weight: 500;
+  margin: 0 4px;
+}
+
+.counsel-btn-container {
+  display: flex;
+  gap: 8px;
+  align-self: end;
+  height: fit-content;
+}
+
+.counsel-search-btn,
+.counsel-create-btn {
+  padding: 11px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  height: 40px;
+  min-width: 70px;
+}
+
+.counsel-search-btn {
+  background: #6b7280;
+  color: white;
+}
+
+.counsel-search-btn:hover {
+  background: #4b5563;
+}
+
+.counsel-search-btn::before {
+  content: '검색';
+}
+
+.counsel-create-btn {
+  background: #06b6d4;
+  color: white;
+}
+
+.counsel-create-btn:hover {
+  background: #0891b2;
+}
+
+.counsel-create-btn::before {
+  content: '신규';
+}
+
+.counsel-search-btn:active,
+.counsel-create-btn:active {
+  transform: translateY(1px);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .counsel-search-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    padding: 20px;
+  }
+
+  .counsel-btn-container {
+    align-self: stretch;
+    justify-content: center;
+  }
+
+  .counsel-name,
+  .counsel-stDate,
+  .counsel-edDate {
+    width: 100%;
+  }
+
+  .date-range {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .counsel-between-date {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .counsel-search-container {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .counsel-name,
+  .counsel-stDate,
+  .counsel-edDate,
+  .counsel-search-btn,
+  .counsel-create-btn {
+    padding: 8px 10px;
+    font-size: 13px;
+    height: 36px;
+  }
+}
