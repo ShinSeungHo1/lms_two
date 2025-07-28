@@ -1,22 +1,41 @@
 <script setup>
 import router from '@/router';
+import { ElMessage } from 'element-plus';
 import { onMounted, ref } from 'vue';
 
+const studentName = ref('');
+const studentStatus = ref('');
+const studentRegStDate = ref('');
+const studentRegEdDate = ref('');
 
-const searchName = ref('');
-const searchStatusYn = ref('');
-const regStDate = ref('');
-const regEdDate = ref('');
+const searchStudent = () => {
+  const today = new Date().toISOString().split('T')[0];
 
-// 검색 버튼을 클릭할 때, 검색 데이터가 QueryParam에 들어가도록 하는 함수
-const handlerSearch = () => {
+  if (studentRegStDate.value && studentRegStDate.value > today) {
+    ElMessage.error('시작일은 오늘 이후 날짜일 수 없습니다.');
+    return;
+  }
+
+  if (studentRegEdDate.value && studentRegEdDate.value < today) {
+    ElMessage.error('종료일은 오늘 이후 날짜일 수 없스니다.');
+    return;
+  }
+
+  if (
+    studentRegStDate.value &&
+    studentRegEdDate.value &&
+    studentRegStDate.value > studentRegEdDate.value
+  ) {
+    ElMessage.error('종료일은 시작일보다 빠를 수 없습니다.');
+    return;
+  }
+
   const query = [];
 
-  // 1. searchTitle의 값이 있을 경우, 쿼리라는 array에 담아둠
-  searchName.value && query.push(`searchName=${searchName.value}`);
-  searchStatusYn.value && query.push(`status=${searchStatusYn.value}`);
-  regStDate.value && query.push(`regStDate=${regStDate.value}`);
-  regEdDate.value && query.push(`regEdDate=${regEdDate.value}`);
+  !studentName.value || query.push(`searchName=${studentName.value}`);
+  !studentStatus.value || query.push(`searchStatusYn=${studentStatus.value}`);
+  !studentRegStDate.value || query.push(`regStDate=${studentRegStDate.value}`);
+  !studentRegEdDate.value || query.push(`regEdDate=${studentRegEdDate.value}`);
 
   const queryString = query.length > 0 ? `?${query.join('&')}` : '';
 
@@ -29,18 +48,26 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="student-container">
-    <div class="input-box">
-      이름: <input v-model.lazy="searchName" />
-      재학 상태: <select v-model="searchStatusYn">
-        <option value selected="selected"> 선택 </option>
-        <option value="W"> 승인대기중 </option>
-        <option value="Y"> 재학 </option>
-        <option value="N"> 탈퇴 </option>
+  <div class="search-container">
+    <div class="student-name-input">
+      <input id="student-name" v-model.lazy="studentName" type="text" />
+    </div>
+    <div class="student-status-input">
+      <select id="student-status-selector" v-model="studentStatus">
+        <option value="">선택</option>
+        <option value="W">승인대기</option>
+        <option value="Y">재학</option>
+        <option value="N">탈퇴</option>
       </select>
-      가입 기간: <input v-model="regStDate" type="date" />
-      ~ <input v-model="regEdDate" type="date" />
-      <button @click="handlerSearch">검색</button>
+    </div>
+    <div class="student-regDate-input">
+      가입 기간:
+      <input id="student-regStDate" v-model="studentRegStDate" type="date" />
+      ~
+      <input id="student-regEdDate" v-model="studentRegEdDate" type="date" />
+    </div>
+    <div class="search-btn-container">
+      <button id="search-btn" @click="searchStudent">검색</button>
     </div>
   </div>
 </template>

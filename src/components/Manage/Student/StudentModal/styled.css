@@ -1,54 +1,250 @@
-@import 'tailwindcss';
-
-.student-modal-overlay {
-  @apply fixed inset-0 flex items-center justify-center bg-gray-500/50 font-bold backdrop-blur-xs;
-}
-/* whitespace-nowrap 자동 줄바꿈 방지 */
-.student-modal-container {
-  @apply relative w-auto rounded-lg bg-white p-5 whitespace-nowrap opacity-100 shadow-lg;
-}
-
-.student-modal-form label {
-  @apply mb-4 flex flex-col;
-}
-
-.student-modal-form input[type='text'] {
-  @apply mt-1 rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none;
+/* 모달 백드롭 */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-.student-modal-form input[type='file'] {
-  @apply hidden;
+/* 모달 컨테이너 전체 */
+.modal-content {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  max-width: 700px;
+  width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
 }
 
-.student-preview-image {
-  @apply h-[100px] w-[100px] rounded-md border border-gray-300 object-cover;
+/* 모달 타이틀 */
+.student-detail-title {
+  background: #4a5568;
+  color: white;
+  padding: 16px 24px;
+  font-size: 18px;
+  font-weight: 600;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0;
 }
 
-.student-no-image {
-  @apply flex h-[100px] w-[100px] items-center justify-center rounded-md border border-gray-300 bg-gray-100 text-sm text-gray-500;
+.close-mark {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
 }
 
-.student-img-label {
-  @apply mt-2 cursor-pointer rounded bg-gray-300 px-6 py-2 text-gray-900 transition-all duration-200 ease-in-out hover:bg-green-500 hover:text-white active:translate-y-0.5 active:transform active:bg-green-600 active:shadow-inner;
+.close-mark:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
-.student-button-container {
-  @apply mt-4 space-x-2 text-right;
+/* 학생 정보 컨테이너 */
+.student-detail-container {
+  background: white;
+  padding: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  border-bottom: 1px solid #e2e8f0;
 }
 
-.student-button-container button {
-  @apply cursor-pointer rounded-md px-4 py-2 transition-colors duration-200 first:bg-blue-900 first:text-white last:bg-gray-300 last:text-gray-700 first:hover:bg-blue-950 last:hover:bg-gray-400;
+.student-detail-form-label {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 2fr;
+  gap: 12px;
+  align-items: center;
 }
 
-/* 테이블 관련 */
-.student-modal-table {
-  @apply w-full table-auto border-collapse;
+.student-field-label {
+  background: #e2e8f0;
+  padding: 12px 16px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #374151;
+  border-radius: 4px;
+  text-align: center;
+  border: 1px solid #cbd5e1;
 }
 
-.student-modal-table-th {
-  @apply border bg-[#c0c2d0] p-2 text-left whitespace-nowrap;
+.student-info-label {
+  background: white;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: #4b5563;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  min-height: 20px;
+  display: flex;
+  align-items: center;
 }
 
-.student-modal-table-td {
-  @apply border p-2;
+.student-info-label:not(:empty) {
+  font-weight: 500;
+}
+
+/* 강의 목록 섹션 - "강의 목록" 텍스트 */
+.student-detail-container + div {
+  background: #f8fafc;
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* 강의 목록 테이블 컨테이너 */
+.student-detail-table-container {
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* 강의 목록 테이블 */
+.student-detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.student-detail-table-header {
+  background: #f1f5f9;
+}
+
+.student-detail-table-header-row {
+  /* 기본 table-row 스타일 */
+}
+
+.student-detail-table-header-cell {
+  padding: 12px 16px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  color: #374151;
+  border-right: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.student-detail-table-header-cell:last-child {
+  border-right: none;
+}
+
+.student-detail-table-body {
+  background: white;
+}
+
+.student-detail-table-body-row {
+  border-bottom: 1px solid #f1f5f9;
+  transition: background-color 0.2s ease;
+}
+
+.student-detail-table-body-row:hover {
+  background-color: #fafbfc;
+}
+
+.student-detail-table-body-cell {
+  padding: 12px 16px;
+  text-align: center;
+  font-size: 14px;
+  color: #4b5563;
+  border-right: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+
+.student-detail-table-body-cell:last-child {
+  border-right: none;
+}
+
+/* 닫기 버튼 */
+.close-student-detail-button {
+  background: #6b7280;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin: 16px auto;
+  display: block;
+  min-width: 80px;
+}
+
+.close-student-detail-button:hover {
+  background: #4b5563;
+}
+
+.close-student-detail-button::before {
+  content: '닫기';
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .student-detail-title {
+    padding: 12px 16px;
+    font-size: 16px;
+  }
+
+  .student-detail-container {
+    padding: 16px;
+  }
+
+  .student-detail-form-label {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .student-field-label {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .student-info-label {
+    padding: 10px 12px;
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+
+  .student-detail-table-header-cell,
+  .student-detail-table-body-cell {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .student-detail-title {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  .student-detail-container {
+    padding: 12px;
+  }
+
+  .student-field-label,
+  .student-info-label {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .student-detail-table-header-cell,
+  .student-detail-table-body-cell {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
 }
