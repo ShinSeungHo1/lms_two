@@ -1,0 +1,159 @@
+.counsel-table-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.counsel-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.counsel-table-head {
+  background: #f8fafc;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.counsel-table-head-row {
+  /* 기본 table-row 스타일 */
+}
+
+.counsel-table-head-cell {
+  padding: 16px 20px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  color: #374151;
+  border-right: 1px solid #e2e8f0;
+  background: #f8fafc;
+  position: relative;
+}
+
+.counsel-table-head-cell:last-child {
+  border-right: none;
+}
+
+.counsel-table-body {
+  background: white;
+}
+
+.counsel-table-body-row {
+  border-bottom: 1px solid #f1f5f9;
+  transition: background-color 0.2s ease;
+}
+
+.counsel-table-body-row:hover {
+  background-color: #fafbfc;
+}
+
+.counsel-table-body-row:last-child {
+  border-bottom: none;
+}
+
+.counsel-table-body-cell {
+  padding: 16px 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #4b5563;
+  border-right: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+
+.counsel-table-body-cell:last-child {
+  border-right: none;
+}
+
+/* No. 컬럼 스타일 (첫 번째 컬럼) */
+.counsel-table-body-row .counsel-table-body-cell:first-child {
+  font-weight: 500;
+  color: #ed3500;
+}
+
+/* 상담 과목 컬럼 스타일 (두 번째 컬럼) */
+.counsel-table-body-row .counsel-table-body-cell:nth-child(2) {
+  font-weight: 500;
+  color: #059669;
+}
+
+/* 상담 제목 컬럼 스타일 - 클릭 가능하게 (세 번째 컬럼) */
+.counsel-table-body-row .counsel-table-body-cell:nth-child(3) {
+  font-weight: 600;
+  color: #3b82f6;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.counsel-table-body-row .counsel-table-body-cell:nth-child(3):hover {
+  color: #1d4ed8;
+  background-color: #eff6ff;
+  text-decoration: underline;
+  transform: scale(1.02);
+}
+
+.counsel-table-body-row .counsel-table-body-cell:nth-child(3):active {
+  transform: scale(0.98);
+  background-color: #dbeafe;
+}
+
+/* 상담 학생 컬럼 스타일 (네 번째 컬럼) */
+.counsel-table-body-row .counsel-table-body-cell:nth-child(4) {
+  font-weight: 500;
+  color: #7c3aed;
+}
+
+/* 상담일 컬럼 스타일 (다섯 번째 컬럼) */
+.counsel-table-body-row .counsel-table-body-cell:nth-child(5) {
+  font-size: 13px;
+  color: #6b7280;
+  font-family: 'Monaco', 'Menlo', monospace;
+}
+
+/* 빈 테이블 처리 */
+.counsel-table-empty {
+  background: white;
+}
+
+.counsel-table-empty-row {
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.counsel-table-empty-cell {
+  padding: 40px 20px;
+  text-align: center !important;
+  font-size: 14px;
+  color: #9ca3af;
+  font-style: italic;
+  border: none !important;
+  width: 100%;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .counsel-table-container {
+    overflow-x: auto;
+    border-radius: 0;
+    margin: 10px -20px 0 -20px;
+  }
+
+  .counsel-table {
+    min-width: 700px;
+  }
+
+  .counsel-table-head-cell,
+  .counsel-table-body-cell {
+    padding: 12px 16px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .counsel-table-head-cell,
+  .counsel-table-body-cell {
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+}

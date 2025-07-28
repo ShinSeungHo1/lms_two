@@ -17,7 +17,7 @@ const searchStudent = () => {
   }
 
   if (studentRegEdDate.value && studentRegEdDate.value < today) {
-    ElMessage.error('종료일은 오늘 이후 날짜일 수 없스니다.');
+    ElMessage.error('종료일은 오늘 이후 날짜일 수 없습니다.');
     return;
   }
 
