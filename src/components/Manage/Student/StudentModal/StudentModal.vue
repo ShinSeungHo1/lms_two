@@ -73,9 +73,9 @@ onMounted(() => {
             <div class="student-field-label">이름</div>
             <div class="student-info-label">{{ studentDetail.studentName }}</div>
             <div class="student-field-label">학번</div>
-            <div class="student-info-label">{{ studentDetail.studentId }}</div>
+            <div class="student-info-label">{{ studentDetail.studentNumber }}</div>
             <div class="student-field-label">연락처</div>
-            <div class="student-info-label">{{ studentDetail.studentId }}</div>
+            <div class="student-info-label">{{ studentDetail.studentHp }}</div>
             <div class="student-field-label">이메일</div>
             <div class="student-info-label">{{ studentDetail.studentEmail }}</div>
             <div class="student-field-label">생일</div>
@@ -104,7 +104,7 @@ onMounted(() => {
                 </th>
               </tr>
             </thead>
-            <tbody class="student-detail-table-body">
+            <tbody v-if="lectureList.length > 0" class="student-detail-table-body">
               <tr
                 v-for="lecture in lectureList"
                 :key="lecture.lecId"
@@ -114,6 +114,13 @@ onMounted(() => {
                 <td class="student-detail-table-body-cell">{{ lecture.lectureName }}</td>
                 <td class="student-detail-table-body-cell">{{ lecture.lectureStartDate }}</td>
                 <td class="student-detail-table-body-cell">{{ lecture.lectureEndDate }}</td>
+              </tr>
+            </tbody>
+            <tbody v-else class="student-detail-table-empty">
+              <tr class="student-detail-table-empty-row">
+                <td class="student-detail-table-empty-cell" colspan="4">
+                  진행하는 강의 목록이 없습니다.
+                </td>
               </tr>
             </tbody>
           </table>

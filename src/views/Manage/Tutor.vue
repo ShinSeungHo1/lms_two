@@ -1,0 +1,10 @@
+<script setup>
+import ContentBox from '@/components/common/ContentBox.vue';
+import TutorSearch from '@/components/Manage/Tutor/TutorSearch/TutorSearch.vue';
+import TutorMain from '@/components/Manage/Tutor/TutorMain/TutorMain.vue';
+</script>
+<template>
+  <ContentBox>강사 관리</ContentBox>
+  <TutorSearch />
+  <TutorMain />
+</template>

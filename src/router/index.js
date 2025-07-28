@@ -1,6 +1,9 @@
 import Login from '@/views/Auth/Login.vue';
 import DashBoard from '@/views/DashBoard/DashBoard.vue';
+
 import Student from '@/views/Manage/Student.vue';
+import Tutor from '@/views/Manage/Tutor.vue';
+
 import NotFound from '@/views/NotFound/NotFound.vue';
 import LearningMaterials from '@/views/Support/LearningMaterials.vue';
 import LectureSurvey from '@/views/Support/LectureSurvey.vue';
@@ -92,6 +95,11 @@ const router = createRouter({
               path: 'student',
               name: 'student',
               component: Student,
+            },
+            {
+              path: 'tutor',
+              name: 'tutor',
+              component: Tutor,
             },
           ],
         },
