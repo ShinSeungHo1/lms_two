@@ -1,7 +1,10 @@
 <script setup>
 import router from '@/router';
+import { useModalState } from '@/stores/modalState';
 import { ElMessage } from 'element-plus';
 import { onMounted, ref } from 'vue';
+
+const modalState = useModalState();
 
 const counselTitle = ref('');
 const counselStDate = ref('');
@@ -34,6 +37,10 @@ const searchCounsel = () => {
   const queryString = query.length > 0 ? `?${query.join('&')}` : '';
 
   router.push(queryString);
+};
+
+const createCounsel = () => {
+  modalState.$patch({ isOpen: true, type: 'createCounsel' });
 };
 
 onMounted(() => {

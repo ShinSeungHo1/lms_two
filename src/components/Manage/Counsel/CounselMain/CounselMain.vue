@@ -3,16 +3,21 @@ import axios from 'axios';
 import { ElMessage } from 'element-plus';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
+import { useModalState } from '@/stores/modalState';
 
 import PageNavigation from '@/components/common/PageNavigation.vue';
+import CounselModal from '../CounselModal/CounselModal.vue';
 
 const headList = ['No.', '상담 과목', '상담 제목', '상담 학생', '상담일'];
 
 const route = useRoute();
+const modalState = useModalState();
 
 const counselList = ref([]);
 const listCount = ref(0);
 const lectureList = ref([]);
+
+const counselId = ref(0);
 
 const searchCounsel = (cPage = 1) => {
   const param = {
@@ -38,7 +43,10 @@ const searchCounsel = (cPage = 1) => {
     });
 };
 
-const counselDetailModal = (id, lecId) => {};
+const counselDetailModal = (id) => {
+  modalState.$patch({ isOpen: true, type: 'counselDetail' });
+  counselId.value = id;
+};
 
 onMounted(() => {
   searchCounsel();
@@ -62,10 +70,7 @@ onMounted(() => {
           <td class="counsel-table-body-cell">
             {{ counsel.lecName }}
           </td>
-          <td
-            class="counsel-table-body-cell"
-            @click="counselDetailModal(counsel.counselId, counsel.lecId)"
-          >
+          <td class="counsel-table-body-cell" @click="counselDetailModal(counsel.counselId)">
             {{ counsel.counselTitle }}
           </td>
           <td class="counsel-table-body-cell">
@@ -84,6 +89,17 @@ onMounted(() => {
     </table>
   </div>
   <PageNavigation :items-per-page="5" :total-items="listCount" :on-page-change="searchCounsel" />
+  <CounselModal
+    v-if="modalState.type === 'counselDetail' && modalState.isOpen"
+    :counsel-id="counselId"
+    :lectures="lectureList"
+    @success="searchCounsel"
+  />
+  <CounselModal
+    v-if="modalState.type === 'createCounsel' && modalState.isOpen"
+    :lectures="lectureList"
+    @success="searchCounsel"
+  />
 </template>
 <style>
 @import './styled.css';
