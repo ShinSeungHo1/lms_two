@@ -1,0 +1,182 @@
+/* 채용 검색 컨테이너 */
+.recruit-search-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  margin: 20px auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  width: 87.5%; /* w-7/8과 동일 */
+  max-width: none;
+}
+
+/* 제목 입력 영역 */
+.recruit-search-title-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.recruit-search-title-input::before {
+  content: '학생명';
+  font-size: 14px;
+  font-weight: 500;
+  color: #495057;
+  min-width: 60px;
+  text-align: left;
+}
+
+/* 제목 입력 필드 */
+#recruit-search-title {
+  width: 200px;
+  padding: 8px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: white;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+  outline: none;
+}
+
+#recruit-search-title:focus {
+  border-color: #74b9ff;
+  box-shadow: 0 0 0 2px rgba(116, 185, 255, 0.2);
+}
+
+#recruit-search-title::placeholder {
+  color: #adb5bd;
+}
+
+/* 날짜 입력 영역 */
+.recruit-search-date-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.recruit-search-date-input::before {
+  content: '입사일자';
+  font-size: 14px;
+  font-weight: 500;
+  color: #495057;
+  min-width: 60px;
+  text-align: left;
+}
+
+/* 날짜 입력 필드 */
+.recruit-search-date {
+  width: 140px;
+  padding: 8px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: white;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+  outline: none;
+  cursor: pointer;
+}
+
+.recruit-search-date:focus {
+  border-color: #74b9ff;
+  box-shadow: 0 0 0 2px rgba(116, 185, 255, 0.2);
+}
+
+/* 날짜 구분자 */
+.recruit-date-between {
+  font-size: 14px;
+  color: #6c757d;
+  font-weight: 500;
+  margin: 0 4px;
+}
+
+/* 버튼 컨테이너 */
+.recruit-search-btn-container {
+  margin-left: auto;
+}
+
+/* 검색 버튼 */
+#recruit-search-btn {
+  padding: 10px 24px;
+  background-color: #8e9aaf;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 80px;
+}
+
+#recruit-search-btn::before {
+  content: '검색';
+}
+
+#recruit-search-btn:hover {
+  background-color: #6c7b95;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#recruit-search-btn:active {
+  transform: translateY(0);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .recruit-search-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .recruit-search-title-input,
+  .recruit-search-date-input {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .recruit-search-title-input::before,
+  .recruit-search-date-input::before {
+    min-width: auto;
+  }
+
+  #recruit-search-title,
+  .recruit-search-date {
+    width: 100%;
+    max-width: none;
+  }
+
+  .recruit-search-btn-container {
+    margin-left: 0;
+    margin-top: 8px;
+  }
+
+  #recruit-search-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .recruit-search-date-input {
+    gap: 8px;
+  }
+
+  .recruit-search-date {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .recruit-date-between {
+    align-self: center;
+  }
+}

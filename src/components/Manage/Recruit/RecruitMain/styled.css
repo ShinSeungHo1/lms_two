@@ -1,0 +1,250 @@
+/* 테이블 컨테이너 */
+.recruit-table-container {
+  width: 87.5%; /* content-box-container와 동일한 너비 */
+  margin: 20px auto;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e9ecef;
+}
+
+/* 테이블 기본 스타일 */
+.recruit-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background-color: white;
+}
+
+/* 테이블 헤더 */
+.recruit-table-head {
+  background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.recruit-table-head-row {
+  border: none;
+}
+
+.recruit-table-head-cell {
+  padding: 16px 12px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  color: white;
+  border: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.recruit-table-head-cell:last-child {
+  border-right: none;
+}
+
+/* 테이블 바디 */
+.recruit-table-body {
+  background-color: white;
+}
+
+.recruit-table-body-row {
+  border-bottom: 1px solid #f1f3f4;
+  transition: all 0.2s ease;
+}
+
+.recruit-table-body-row:hover {
+  background-color: #f8f9fa;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.recruit-table-body-row:last-child {
+  border-bottom: none;
+}
+
+/* 테이블 셀 */
+.recruit-table-body-cell {
+  padding: 14px 12px;
+  text-align: center;
+  color: #495057;
+  border-right: 1px solid #f1f3f4;
+  vertical-align: middle;
+  line-height: 1.4;
+}
+
+.recruit-table-body-cell:last-child {
+  border-right: none;
+}
+
+/* 학생명 클릭 가능 스타일 (두 번째 열) */
+.recruit-table-body-row .recruit-table-body-cell:nth-child(2) {
+  color: #0984e3;
+  cursor: pointer;
+  font-weight: 500;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.recruit-table-body-row .recruit-table-body-cell:nth-child(2):hover {
+  color: #2d3436;
+  background-color: #e3f2fd;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.recruit-table-body-row .recruit-table-body-cell:nth-child(2):active {
+  transform: scale(0.98);
+}
+
+/* 상태 표시 스타일 (마지막 열) */
+.recruit-table-body-row .recruit-table-body-cell:last-child {
+  font-weight: 600;
+}
+
+/* 취업 상태 */
+.recruit-table-body-row:has(.recruit-table-body-cell:last-child:contains('취업'))
+  .recruit-table-body-cell:last-child {
+  color: #00b894;
+  background-color: #d1f2eb;
+  border-radius: 12px;
+  margin: 4px;
+  padding: 6px 12px;
+}
+
+/* 실업 상태 - CSS로는 :contains가 지원되지 않으므로 클래스를 추가해야 함 */
+.recruit-status-employed {
+  color: #00b894 !important;
+  background-color: #d1f2eb !important;
+  border-radius: 12px !important;
+  margin: 4px !important;
+  padding: 6px 12px !important;
+  display: inline-block;
+}
+
+.recruit-status-unemployed {
+  color: #e17055 !important;
+  background-color: #ffeaa7 !important;
+  border-radius: 12px !important;
+  margin: 4px !important;
+  padding: 6px 12px !important;
+  display: inline-block;
+}
+
+/* 로그인 ID 스타일 (첫 번째 열) */
+.recruit-table-body-row .recruit-table-body-cell:first-child {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  color: #6c757d;
+  background-color: #f8f9fa;
+}
+
+/* 날짜 스타일 (3, 4번째 열) */
+.recruit-table-body-row .recruit-table-body-cell:nth-child(3),
+.recruit-table-body-row .recruit-table-body-cell:nth-child(4) {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  color: #6c757d;
+}
+
+/* 빈 셀 스타일 */
+.recruit-table-body-cell:empty::after {
+  content: '-';
+  color: #adb5bd;
+  font-style: italic;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 992px) {
+  .recruit-table-container {
+    width: 95%;
+    margin: 15px auto;
+  }
+
+  .recruit-table-head-cell,
+  .recruit-table-body-cell {
+    padding: 12px 8px;
+    font-size: 13px;
+  }
+
+  .recruit-table-head-cell {
+    padding: 14px 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .recruit-table-container {
+    width: 98%;
+    margin: 10px auto;
+    overflow-x: auto;
+  }
+
+  .recruit-table {
+    min-width: 600px;
+  }
+
+  .recruit-table-head-cell,
+  .recruit-table-body-cell {
+    padding: 10px 6px;
+    font-size: 12px;
+  }
+
+  .recruit-table-head-cell {
+    padding: 12px 6px;
+  }
+
+  /* 모바일에서 학생명 클릭 표시 더 명확하게 */
+  .recruit-table-body-row .recruit-table-body-cell:nth-child(2)::after {
+    content: '👆';
+    margin-left: 4px;
+    font-size: 10px;
+    opacity: 0.7;
+  }
+}
+
+/* 스크롤바 스타일링 */
+.recruit-table-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.recruit-table-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.recruit-table-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.recruit-table-container::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+/* 로딩 상태 애니메이션 */
+.recruit-table-loading {
+  position: relative;
+}
+
+.recruit-table-loading::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 100;
+}
+
+.recruit-table-loading::after {
+  content: '로딩 중...';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 101;
+  font-weight: 500;
+  color: #74b9ff;
+}
