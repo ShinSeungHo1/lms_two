@@ -4,6 +4,7 @@ import DashBoard from '@/views/DashBoard/DashBoard.vue';
 import Student from '@/views/Manage/Student.vue';
 import Tutor from '@/views/Manage/Tutor.vue';
 import Counsel from '@/views/Manage/Counsel.vue';
+import Recruit from '@/views/Manage/Recruit.vue';
 
 import NotFound from '@/views/NotFound/NotFound.vue';
 import LearningMaterials from '@/views/Support/LearningMaterials.vue';
@@ -106,6 +107,11 @@ const router = createRouter({
               path: 'counsel',
               name: 'counsel',
               component: Counsel,
+            },
+            {
+              path: 'recruit',
+              name: 'recruit',
+              component: Recruit,
             },
           ],
         },

@@ -1,0 +1,340 @@
+/* 신규 버튼 컨테이너 */
+.recruit-create-btn-container {
+  width: 87.5%; /* content-box-container와 동일한 너비 */
+  margin: 20px auto 10px auto;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 8px;
+}
+
+/* 신규 버튼 */
+#recruit-create-btn {
+  padding: 10px 20px;
+  background-color: #00b894;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 184, 148, 0.2);
+}
+
+#recruit-create-btn:hover {
+  background-color: #00a085;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 184, 148, 0.3);
+}
+
+#recruit-create-btn:active {
+  transform: translateY(0);
+}
+
+/* 테이블 컨테이너 */
+.recruit-detail-table-container {
+  width: 87.5%; /* content-box-container와 동일한 너비 */
+  margin: 10px auto 20px auto;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e9ecef;
+}
+
+/* 테이블 기본 스타일 */
+.recruit-detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background-color: white;
+}
+
+/* 테이블 헤더 */
+.recruit-detail-table-head {
+  background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.recruit-detail-table-head-row {
+  border: none;
+}
+
+.recruit-detail-table-head-cell {
+  padding: 16px 12px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  color: white;
+  border: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.recruit-detail-table-head-cell:last-child {
+  border-right: none;
+}
+
+/* 테이블 바디 */
+.recruit-detail-table-body {
+  background-color: white;
+}
+
+.recruit-detail-table-body-row {
+  border-bottom: 1px solid #f1f3f4;
+  transition: all 0.2s ease;
+}
+
+.recruit-detail-table-body-row:hover {
+  background-color: #f8f9fa;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.recruit-detail-table-body-row:last-child {
+  border-bottom: none;
+}
+
+/* 테이블 셀 */
+.recruit-detail-table-body-cell {
+  padding: 14px 12px;
+  text-align: center;
+  color: #495057;
+  border-right: 1px solid #f1f3f4;
+  vertical-align: middle;
+  line-height: 1.4;
+}
+
+.recruit-detail-table-body-cell:last-child {
+  border-right: none;
+}
+
+/* 학생명 클릭 가능 스타일 (두 번째 열) */
+.recruit-detail-table-body-row .recruit-detail-table-body-cell:nth-child(2) {
+  color: #0984e3;
+  cursor: pointer;
+  font-weight: 500;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.recruit-detail-table-body-row .recruit-detail-table-body-cell:nth-child(2):hover {
+  color: #2d3436;
+  background-color: #e3f2fd;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.recruit-detail-table-body-row .recruit-detail-table-body-cell:nth-child(2):active {
+  transform: scale(0.98);
+}
+
+/* 상태 표시 스타일 (6번째 열) */
+.recruit-detail-table-body-row .recruit-detail-table-body-cell:nth-child(6) {
+  font-weight: 600;
+}
+
+/* 취업 상태 */
+.recruit-status-employed {
+  color: #00b894 !important;
+  background-color: #d1f2eb !important;
+  border-radius: 12px !important;
+  padding: 6px 12px !important;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* 퇴직 상태 */
+.recruit-status-retired {
+  color: #e17055 !important;
+  background-color: #ffeaa7 !important;
+  border-radius: 12px !important;
+  padding: 6px 12px !important;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* 로그인 ID 스타일 (첫 번째 열) */
+.recruit-detail-table-body-row .recruit-detail-table-body-cell:first-child {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  color: #6c757d;
+  background-color: #f8f9fa;
+}
+
+/* 날짜 스타일 (3, 4번째 열) */
+.recruit-detail-table-body-row .recruit-detail-table-body-cell:nth-child(3),
+.recruit-detail-table-body-row .recruit-detail-table-body-cell:nth-child(4) {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  color: #6c757d;
+}
+
+/* 퇴직 버튼 스타일 (마지막 열) */
+#change-status-btn {
+  padding: 6px 16px;
+  background-color: #fd79a8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 60px;
+}
+
+#change-status-btn:hover:not(:disabled) {
+  background-color: #e84393;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(232, 67, 147, 0.3);
+}
+
+#change-status-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* 퇴직 버튼 비활성화 상태 */
+#change-status-btn:disabled {
+  background-color: #bdc3c7;
+  color: #7f8c8d;
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+  box-shadow: none;
+}
+
+#change-status-btn:disabled:hover {
+  background-color: #bdc3c7;
+  transform: none;
+  box-shadow: none;
+}
+
+/* 빈 셀 스타일 */
+.recruit-detail-table-body-cell:empty::after {
+  content: '-';
+  color: #adb5bd;
+  font-style: italic;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 992px) {
+  .recruit-create-btn-container,
+  .recruit-detail-table-container {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .recruit-detail-table-head-cell,
+  .recruit-detail-table-body-cell {
+    padding: 12px 8px;
+    font-size: 13px;
+  }
+
+  .recruit-detail-table-head-cell {
+    padding: 14px 8px;
+  }
+
+  #change-status-btn {
+    padding: 5px 12px;
+    font-size: 11px;
+    min-width: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .recruit-create-btn-container,
+  .recruit-detail-table-container {
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .recruit-detail-table-container {
+    overflow-x: auto;
+  }
+
+  .recruit-detail-table {
+    min-width: 700px;
+  }
+
+  .recruit-detail-table-head-cell,
+  .recruit-detail-table-body-cell {
+    padding: 10px 6px;
+    font-size: 12px;
+  }
+
+  .recruit-detail-table-head-cell {
+    padding: 12px 6px;
+  }
+
+  #recruit-create-btn {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  #change-status-btn {
+    padding: 4px 10px;
+    font-size: 10px;
+    min-width: 45px;
+  }
+
+  /* 모바일에서 학생명 클릭 표시 더 명확하게 */
+  .recruit-detail-table-body-row .recruit-detail-table-body-cell:nth-child(2)::after {
+    content: '👆';
+    margin-left: 4px;
+    font-size: 10px;
+    opacity: 0.7;
+  }
+}
+
+/* 스크롤바 스타일링 */
+.recruit-detail-table-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.recruit-detail-table-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.recruit-detail-table-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.recruit-detail-table-container::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+/* 로딩 상태 애니메이션 */
+.recruit-detail-table-loading {
+  position: relative;
+}
+
+.recruit-detail-table-loading::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 100;
+}
+
+.recruit-detail-table-loading::after {
+  content: '로딩 중...';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 101;
+  font-weight: 500;
+  color: #74b9ff;
+}
