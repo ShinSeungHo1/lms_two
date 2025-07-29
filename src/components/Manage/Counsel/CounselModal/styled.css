@@ -1,0 +1,305 @@
+/* 모달 배경 */
+.counsel-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  .counsel-btn-container {
+    margin-top: 24px;
+    padding-top: 20px;
+  }
+
+  .counsel-btn-container button {
+    padding: 10px 20px;
+    font-size: 13px;
+    min-width: 70px;
+  }
+}
+
+/* 모달 컨텐츠 */
+.counsel-modal-content {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 모달 컨테이너 */
+.counsel-detail-container {
+  padding: 24px;
+  position: relative;
+}
+
+/* 모달 제목 */
+.counsel-detail-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+/* 닫기 버튼 */
+.close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #666;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* 폼 컨테이너 */
+.counsel-detail-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 폼 행 */
+.counsel-detail-form-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 16px;
+  align-items: flex-start;
+  min-height: 44px;
+}
+
+/* 필드 라벨 */
+.counsel-detail-field {
+  background-color: #8e9aaf;
+  color: white;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  min-height: 44px;
+  box-sizing: border-box;
+}
+
+.counsel-detail-field::after {
+  content: '*';
+  color: #ff4757;
+  margin-left: 4px;
+}
+
+/* 필드별 라벨 텍스트 */
+.counsel-detail-form-row:nth-child(1) .counsel-detail-field::before {
+  content: '상담 과목';
+}
+
+.counsel-detail-form-row:nth-child(2) .counsel-detail-field::before {
+  content: '상담 학생';
+}
+
+.counsel-detail-form-row:nth-child(3) .counsel-detail-field::before {
+  content: '상담 제목';
+}
+
+.counsel-detail-form-row:nth-child(4) .counsel-detail-field::before {
+  content: '상담 내용';
+}
+
+/* 정보 표시 영역 */
+.counsel-detail-info {
+  display: flex;
+  align-items: center;
+  line-height: 1.4;
+}
+
+/* 입력 필드 공통 스타일 */
+.counsel-detail-info input,
+.counsel-detail-info select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  font-size: 14px;
+  color: #333;
+  outline: none;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+/* 포커스 시 스타일 */
+.counsel-detail-info input:focus,
+.counsel-detail-info select:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+/* 셀렉트 박스 추가 스타일 */
+.counsel-detail-info select {
+  cursor: pointer;
+}
+
+.counsel-detail-subject-option {
+  padding: 8px 16px;
+  color: #333;
+}
+
+/* 상담 내용 영역 (텍스트 에어리어처럼) */
+.counsel-detail-form-row:nth-child(4) .counsel-detail-info input {
+  min-height: 80px;
+  padding-top: 12px;
+  vertical-align: top;
+  resize: vertical;
+}
+
+/* 버튼 컨테이너 */
+.counsel-btn-container {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #eee;
+}
+
+/* 버튼 공통 스타일 */
+.counsel-btn-container button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 80px;
+}
+
+/* 저장 버튼 */
+#counsel-save-btn {
+  background-color: #00b894;
+  color: white;
+}
+
+#counsel-save-btn::before {
+  content: '저장';
+}
+
+#counsel-save-btn:hover {
+  background-color: #00a085;
+  transform: translateY(-1px);
+}
+
+/* 수정 버튼 */
+#counsel-update-btn {
+  background-color: #74b9ff;
+  color: white;
+}
+
+#counsel-update-btn::before {
+  content: '수정';
+}
+
+#counsel-update-btn:hover {
+  background-color: #0984e3;
+  transform: translateY(-1px);
+}
+
+/* 삭제 버튼 */
+#counsel-delete-btn {
+  background-color: #fd79a8;
+  color: white;
+}
+
+#counsel-delete-btn::before {
+  content: '삭제';
+}
+
+#counsel-delete-btn:hover {
+  background-color: #e84393;
+  transform: translateY(-1px);
+}
+
+/* 취소 버튼 */
+#counsel-cancel-btn {
+  background-color: #b2bec3;
+  color: white;
+}
+
+#counsel-cancel-btn::before {
+  content: '취소';
+}
+
+#counsel-cancel-btn:hover {
+  background-color: #636e72;
+  transform: translateY(-1px);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .counsel-modal-content {
+    width: 95%;
+    margin: 20px;
+  }
+
+  .counsel-detail-container {
+    padding: 20px;
+  }
+
+  .counsel-detail-form-row {
+    grid-template-columns: 100px 1fr;
+    gap: 12px;
+  }
+
+  .counsel-detail-field {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .counsel-detail-info input,
+  .counsel-detail-info select {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .counsel-detail-form-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .counsel-detail-field {
+    text-align: left;
+  }
+
+  .counsel-btn-container {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .counsel-btn-container button {
+    width: 100%;
+  }
+}
