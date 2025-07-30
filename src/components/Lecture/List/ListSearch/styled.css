@@ -1,0 +1,280 @@
+/* 강의 검색 컨테이너 */
+.lecture-search-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  margin: 20px auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  width: 87.5%; /* content-box-container와 동일한 너비 */
+  max-width: none;
+}
+
+/* 셀렉터 입력 영역 */
+.lecture-search-selector-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 셀렉터 드롭다운 */
+#lecture-search-selector {
+  width: 120px;
+  padding: 8px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: white;
+  color: #495057;
+  cursor: pointer;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 16px;
+  padding-right: 32px;
+}
+
+#lecture-search-selector:focus {
+  border-color: #74b9ff;
+  box-shadow: 0 0 0 2px rgba(116, 185, 255, 0.2);
+}
+
+.lecture-search-selector-option {
+  padding: 8px 12px;
+  color: #495057;
+}
+
+/* 제목 입력 영역 */
+.lecture-search-title-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+/* 제목 입력 필드 */
+.lecture-search-title {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: white;
+  color: #495057;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+  outline: none;
+}
+
+.lecture-search-title:focus {
+  border-color: #74b9ff;
+  box-shadow: 0 0 0 2px rgba(116, 185, 255, 0.2);
+}
+
+.lecture-search-title::placeholder {
+  color: #adb5bd;
+}
+
+/* 날짜 입력 영역 */
+.lecture-search-date-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lecture-search-date-input::before {
+  content: '강의 기간';
+  font-size: 14px;
+  font-weight: 500;
+  color: #495057;
+  min-width: 70px;
+  text-align: left;
+}
+
+/* 날짜 입력 필드 */
+.lecture-search-date {
+  width: 140px;
+  padding: 8px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: white;
+  color: #495057;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+  outline: none;
+  cursor: pointer;
+}
+
+.lecture-search-date:focus {
+  border-color: #74b9ff;
+  box-shadow: 0 0 0 2px rgba(116, 185, 255, 0.2);
+}
+
+/* 날짜 구분자 */
+.between-lecture-date {
+  font-size: 14px;
+  color: #6c757d;
+  font-weight: 500;
+  margin: 0 4px;
+}
+
+/* 버튼 컨테이너 */
+.lecture-search-btn-container {
+  margin-left: auto;
+}
+
+/* 검색 버튼 */
+#lecture-search-btn {
+  padding: 10px 24px;
+  background-color: #8e9aaf;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 80px;
+}
+
+#lecture-search-btn:hover {
+  background-color: #6c7b95;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#lecture-search-btn:active {
+  transform: translateY(0);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 992px) {
+  .lecture-search-container {
+    width: 95%;
+    gap: 12px;
+    padding: 14px 16px;
+  }
+
+  #lecture-search-selector {
+    width: 100px;
+    font-size: 13px;
+  }
+
+  .lecture-search-title,
+  .lecture-search-date {
+    font-size: 13px;
+  }
+
+  .lecture-search-date {
+    width: 130px;
+  }
+
+  #lecture-search-btn {
+    padding: 8px 20px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .lecture-search-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 16px;
+    width: 98%;
+  }
+
+  .lecture-search-selector-input,
+  .lecture-search-title-input,
+  .lecture-search-date-input {
+    width: 100%;
+  }
+
+  .lecture-search-date-input {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .lecture-search-date-input::before {
+    min-width: auto;
+  }
+
+  .lecture-search-date {
+    width: 100%;
+    max-width: none;
+  }
+
+  .lecture-search-btn-container {
+    margin-left: 0;
+    margin-top: 8px;
+  }
+
+  #lecture-search-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .lecture-search-container {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  #lecture-search-selector {
+    width: 100%;
+  }
+
+  .lecture-search-date-input {
+    gap: 6px;
+  }
+
+  .lecture-search-date {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .between-lecture-date {
+    align-self: center;
+    margin: 4px 0;
+  }
+}
+
+/* 포커스 순서 개선 */
+.lecture-search-container *:focus {
+  z-index: 1;
+  position: relative;
+}
+
+/* 드롭다운 화살표 애니메이션 */
+#lecture-search-selector:focus {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2374b9ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+}
+
+/* 인터랙션 개선 */
+.lecture-search-container input:hover,
+.lecture-search-container select:hover {
+  border-color: #adb5bd;
+}
+
+/* 접근성 개선 */
+@media (prefers-reduced-motion: reduce) {
+  .lecture-search-container *,
+  .lecture-search-container *::before,
+  .lecture-search-container *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
