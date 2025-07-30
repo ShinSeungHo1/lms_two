@@ -1,0 +1,479 @@
+/* 모달 배경 */
+.lecture-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* 모달 컨텐츠 */
+.lecture-modal-content {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 강의 상세 컨테이너 */
+.lecture-detail-container {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* 모달 제목 헤더 */
+.lecture-detail-title {
+  background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+  color: white;
+  padding: 20px 24px;
+  font-size: 18px;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* 닫기 버튼 (상단) */
+#close-x-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  font-weight: bold;
+}
+
+#close-x-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+/* 강의 상세 섹션 */
+.lecture-detail-content {
+  padding: 24px;
+}
+
+.lecture-detail-content-title {
+  background-color: #8e9aaf;
+  color: white;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 16px;
+  border-radius: 4px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* 컨텐츠 행 */
+.lecture-detail-content-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.lecture-detail-content-row:first-of-type {
+  flex-direction: column;
+}
+
+.lecture-detail-content-divide {
+  flex: 1;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* 필드 라벨 */
+.lecture-detail-field {
+  background-color: #8e9aaf;
+  color: white;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 4px;
+  min-width: 80px;
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* 정보 표시 영역 */
+.lecture-detail-info {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+  font-size: 13px;
+  color: #495057;
+  min-height: 20px;
+  display: flex;
+  align-items: center;
+}
+
+/* 구분선 */
+hr {
+  border: none;
+  height: 1px;
+  background-color: #e9ecef;
+  margin: 24px;
+}
+
+/* 강의 계획 섹션 */
+.lecture-plan-container {
+  padding: 0 24px 24px 24px;
+}
+
+.lecture-plan-title {
+  background-color: #8e9aaf;
+  color: white;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 16px;
+  border-radius: 4px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* 계획 컨텐츠 열 */
+.lecture-plan-content-column {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+  align-items: flex-start;
+}
+
+/* 계획 필드 */
+.lecture-plan-field {
+  background-color: #8e9aaf;
+  color: white;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 4px;
+  min-width: 120px;
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* 계획 정보 */
+.lecture-plan-info {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  font-size: 13px;
+  color: #495057;
+  min-height: 60px;
+  display: flex;
+  align-items: flex-start;
+  line-height: 1.4;
+}
+
+/* 계획 테이블 */
+.lecture-plan-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+  background-color: white;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* 테이블 헤더 */
+.lecture-plan-table-head {
+  background: linear-gradient(135deg, #8e9aaf 0%, #6c7b95 100%);
+}
+
+.lecture-plan-table-head-row {
+  border: none;
+}
+
+.lecture-plan-table-head-cell {
+  padding: 12px 16px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 13px;
+  color: white;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.lecture-plan-table-head-cell:first-child {
+  width: 15%;
+}
+
+.lecture-plan-table-head-cell:nth-child(2) {
+  width: 42.5%;
+}
+
+.lecture-plan-table-head-cell:last-child {
+  width: 42.5%;
+  border-right: none;
+}
+
+/* 테이블 바디 */
+.lecture-plan-table-body {
+  background-color: white;
+}
+
+.lecture-plan-table-body-row {
+  border-bottom: 1px solid #f1f3f4;
+}
+
+.lecture-plan-table-body-row:last-child {
+  border-bottom: none;
+}
+
+.lecture-plan-table-body-cell {
+  padding: 12px 16px;
+  text-align: center;
+  color: #495057;
+  border-right: 1px solid #f1f3f4;
+  vertical-align: top;
+  line-height: 1.4;
+  font-weight: normal;
+  min-height: 60px;
+}
+
+.lecture-plan-table-body-cell:last-child {
+  border-right: none;
+}
+
+/* 빈 셀 스타일 */
+.lecture-plan-table-body-cell:empty::after {
+  content: '-';
+  color: #adb5bd;
+  font-style: italic;
+}
+
+/* 버튼 컨테이너 */
+.lecture-detail-container {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.btn-container-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px auto 24px auto;
+  padding: 0 24px;
+}
+
+/* 버튼 공통 스타일 */
+.btn-container-row button {
+  padding: 12px 32px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-width: 120px;
+}
+
+/* 신청 버튼 */
+#applcation-btn {
+  background-color: #00b894;
+  color: white;
+}
+
+#applcation-btn:hover {
+  background-color: #00a085;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 184, 148, 0.3);
+}
+
+#applcation-btn:active {
+  transform: translateY(0);
+}
+
+/* 취소 버튼 */
+#close-btn {
+  background-color: #b2bec3;
+  color: white;
+}
+
+#close-btn:hover {
+  background-color: #636e72;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(99, 110, 114, 0.3);
+}
+
+#close-btn:active {
+  transform: translateY(0);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .lecture-modal-backdrop {
+    padding: 10px;
+  }
+
+  .lecture-modal-content {
+    max-width: 100%;
+  }
+
+  .lecture-detail-title {
+    padding: 16px 20px;
+    font-size: 16px;
+  }
+
+  #close-x-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+    top: 14px;
+    right: 14px;
+  }
+
+  .lecture-detail-content,
+  .lecture-plan-container {
+    padding: 20px;
+  }
+
+  .lecture-detail-content-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .lecture-detail-content-divide {
+    gap: 8px;
+  }
+
+  .lecture-detail-field,
+  .lecture-plan-field {
+    min-width: 70px;
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  .lecture-detail-info,
+  .lecture-plan-info {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  .lecture-plan-table-head-cell,
+  .lecture-plan-table-body-cell {
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+
+  .btn-container-row {
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 20px;
+  }
+
+  .btn-container-row button {
+    padding: 10px 24px;
+    font-size: 13px;
+    min-width: 100px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .lecture-detail-content-row {
+    gap: 8px;
+  }
+
+  .lecture-detail-content-divide {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+
+  .lecture-plan-content-column {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .lecture-plan-field {
+    text-align: left;
+    min-width: auto;
+  }
+
+  .lecture-plan-table-head-cell:first-child {
+    width: 20%;
+  }
+
+  .lecture-plan-table-head-cell:nth-child(2),
+  .lecture-plan-table-head-cell:last-child {
+    width: 40%;
+  }
+}
+
+/* 애니메이션 효과 */
+.lecture-modal-backdrop {
+  animation: fadeIn 0.3s ease;
+}
+
+.lecture-modal-content {
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 스크롤바 스타일링 */
+.lecture-detail-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.lecture-detail-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.lecture-detail-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.lecture-detail-container::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
