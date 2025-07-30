@@ -5,7 +5,7 @@ import ListModal from '../ListModal/ListModal.vue';
 import axios from 'axios';
 import { useModalState } from '@/stores/modalState';
 import { ElMessage } from 'element-plus';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
@@ -42,6 +42,13 @@ const openLecModal = (id) => {
   modalState.$patch({ isOpen: true, type: 'lecDetail' });
   lecId.value = id;
 };
+
+watch(
+  () => route.query,
+  () => {
+    serarchLectureList();
+  },
+);
 
 onMounted(() => {
   serarchLectureList();

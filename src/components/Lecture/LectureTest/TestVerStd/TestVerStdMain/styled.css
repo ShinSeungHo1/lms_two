@@ -1,0 +1,350 @@
+/* 시험 컨테이너 */
+.std-test-container {
+  width: 87.5%; /* content-box-container와 동일한 너비 */
+  margin: 20px auto;
+}
+
+/* 컨테이너 컨텐츠 */
+.std-test-container-contnet {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e9ecef;
+}
+
+/* 테이블 컨테이너 */
+.std-test-table-container {
+  overflow-x: auto;
+}
+
+/* 테이블 기본 스타일 */
+.std-test-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background-color: white;
+  min-width: 800px;
+}
+
+/* 테이블 헤더 */
+.std-test-table-head {
+  background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.std-test-table-head-row {
+  border: none;
+}
+
+.std-test-table-head-cell {
+  padding: 16px 12px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  color: white;
+  border: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.std-test-table-head-cell:last-child {
+  border-right: none;
+}
+
+/* 헤더 셀별 너비 조정 */
+.std-test-table-head-cell:nth-child(1) {
+  width: 20%;
+} /* 강의명 */
+.std-test-table-head-cell:nth-child(2) {
+  width: 15%;
+} /* 강사명 */
+.std-test-table-head-cell:nth-child(3) {
+  width: 15%;
+} /* 강의실 */
+.std-test-table-head-cell:nth-child(4) {
+  width: 15%;
+} /* 시험 시작일 */
+.std-test-table-head-cell:nth-child(5) {
+  width: 15%;
+} /* 시험 종료일 */
+.std-test-table-head-cell:nth-child(6) {
+  width: 10%;
+} /* 시험 응시 */
+.std-test-table-head-cell:nth-child(7) {
+  width: 10%;
+} /* 성적 확인 */
+
+/* 테이블 바디 */
+.std-test-table-body {
+  background-color: white;
+}
+
+.std-test-table-body-row {
+  border-bottom: 1px solid #f1f3f4;
+  transition: all 0.2s ease;
+}
+
+.std-test-table-body-row:hover {
+  background-color: #f8f9fa;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.std-test-table-body-row:last-child {
+  border-bottom: none;
+}
+
+/* 테이블 셀 */
+.std-test-table-body-cell {
+  padding: 14px 12px;
+  text-align: center;
+  color: #495057;
+  border-right: 1px solid #f1f3f4;
+  vertical-align: middle;
+  line-height: 1.4;
+  font-weight: normal;
+}
+
+.std-test-table-body-cell:last-child {
+  border-right: none;
+}
+
+/* 강의명 스타일 (첫 번째 열) */
+.std-test-table-body-row .std-test-table-body-cell:first-child {
+  font-weight: 600;
+  color: #2d3436;
+}
+
+/* 강사명 스타일 (두 번째 열) */
+.std-test-table-body-row .std-test-table-body-cell:nth-child(2) {
+  font-weight: 500;
+  color: #636e72;
+}
+
+/* 강의실 스타일 (세 번째 열) */
+.std-test-table-body-row .std-test-table-body-cell:nth-child(3) {
+  background-color: #f8f9fa;
+  font-weight: 500;
+}
+
+/* 날짜 스타일 (4, 5번째 열) */
+.std-test-table-body-row .std-test-table-body-cell:nth-child(4),
+.std-test-table-body-row .std-test-table-body-cell:nth-child(5) {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  color: #6c757d;
+}
+
+/* 버튼 컨테이너 셀 */
+.std-test-table-body-row .std-test-table-body-cell:nth-child(6),
+.std-test-table-body-row .std-test-table-body-cell:nth-child(7) {
+  padding: 8px 4px;
+}
+
+/* 버튼 공통 스타일 */
+#std-test-submit-detail-btn,
+#std-test-score-detail-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 70px;
+  white-space: nowrap;
+}
+
+/* 시험 응시 버튼 */
+#std-test-submit-detail-btn {
+  background-color: #00b894;
+  color: white;
+}
+
+#std-test-submit-detail-btn:hover:not(:disabled) {
+  background-color: #00a085;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 184, 148, 0.3);
+}
+
+#std-test-submit-detail-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* 성적 확인 버튼 */
+#std-test-score-detail-btn {
+  background-color: #74b9ff;
+  color: white;
+}
+
+#std-test-score-detail-btn:hover:not(:disabled) {
+  background-color: #0984e3;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(116, 185, 255, 0.3);
+}
+
+#std-test-score-detail-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* 버튼 비활성화 상태 */
+#std-test-submit-detail-btn:disabled,
+#std-test-score-detail-btn:disabled {
+  background-color: #bdc3c7;
+  color: #7f8c8d;
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+  box-shadow: none;
+}
+
+#std-test-submit-detail-btn:disabled:hover,
+#std-test-score-detail-btn:disabled:hover {
+  background-color: #bdc3c7;
+  transform: none;
+  box-shadow: none;
+}
+
+/* 빈 셀 스타일 */
+.std-test-table-body-cell:empty::after {
+  content: '-';
+  color: #adb5bd;
+  font-style: italic;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 992px) {
+  .std-test-container {
+    width: 95%;
+    margin: 15px auto;
+  }
+
+  .std-test-table-head-cell,
+  .std-test-table-body-cell {
+    padding: 12px 8px;
+    font-size: 13px;
+  }
+
+  .std-test-table-head-cell {
+    padding: 14px 8px;
+  }
+
+  #std-test-submit-detail-btn,
+  #std-test-score-detail-btn {
+    padding: 5px 10px;
+    font-size: 11px;
+    min-width: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .std-test-container {
+    width: 98%;
+    margin: 10px auto;
+  }
+
+  .std-test-table-container {
+    overflow-x: auto;
+  }
+
+  .std-test-table {
+    min-width: 700px;
+  }
+
+  .std-test-table-head-cell,
+  .std-test-table-body-cell {
+    padding: 10px 6px;
+    font-size: 12px;
+  }
+
+  .std-test-table-head-cell {
+    padding: 12px 6px;
+  }
+
+  #std-test-submit-detail-btn,
+  #std-test-score-detail-btn {
+    padding: 4px 8px;
+    font-size: 10px;
+    min-width: 50px;
+  }
+}
+
+/* 스크롤바 스타일링 */
+.std-test-table-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.std-test-table-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.std-test-table-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.std-test-table-container::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+/* 로딩 상태 애니메이션 */
+.std-test-table-loading {
+  position: relative;
+}
+
+.std-test-table-loading::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 100;
+}
+
+.std-test-table-loading::after {
+  content: '로딩 중...';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 101;
+  font-weight: 500;
+  color: #74b9ff;
+}
+
+/* 테이블 애니메이션 */
+.std-test-table-body-row {
+  animation: fadeInUp 0.3s ease forwards;
+}
+
+.std-test-table-body-row:nth-child(even) {
+  animation-delay: 0.1s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 접근성 개선 */
+@media (prefers-reduced-motion: reduce) {
+  .std-test-container *,
+  .std-test-container *::before,
+  .std-test-container *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

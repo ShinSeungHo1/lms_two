@@ -23,6 +23,7 @@ import Equipment from '@/views/System/Equipment.vue';
 import Company from '@/views/System/Company.vue';
 
 import List from '@/views/Lecture/List.vue';
+import Test from '@/views/Lecture/Test.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -122,6 +123,11 @@ const router = createRouter({
               path: 'list',
               name: 'list',
               component: List,
+            },
+            {
+              path: 'test',
+              name: 'test',
+              component: Test,
             },
           ],
         },
