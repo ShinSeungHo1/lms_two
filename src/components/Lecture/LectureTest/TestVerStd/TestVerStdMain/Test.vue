@@ -23,6 +23,8 @@ const { user } = useUserInfo();
 const route = useRoute();
 const modalState = useModalState();
 
+const pageKey = ref(0);
+
 const testList = ref([]);
 const listCount = ref(0);
 
@@ -111,6 +113,11 @@ const searchTest = (cPage = 1) => {
     });
 };
 
+const handleTestSuccess = () => {
+  pageKey.value += 1;
+  searchTest();
+};
+
 watch(
   () => route.query,
   () => {
@@ -179,12 +186,18 @@ onMounted(() => {
       </div>
     </div>
   </div>
-  <PageNavigation :items-per-page="5" :total-items="listCount" :on-page-change="searchTest" />
+  <PageNavigation
+    :key="pageKey"
+    :items-per-page="5"
+    :total-items="listCount"
+    :on-page-change="searchTest"
+  />
   <TestModal
     v-if="modalState.type === 'testResult' && modalState.isOpen"
     :test-id="lecTestId"
     :lec-id="lectureId"
     :student-id="lecStudentId"
+    @success="handleTestSuccess"
   />
 </template>
 <style>

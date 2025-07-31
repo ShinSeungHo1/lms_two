@@ -2,6 +2,7 @@
 import ContentBox from '@/components/common/ContentBox.vue';
 import TestSearch from '@/components/Lecture/LectureTest/TestCommon/TestSearch/TestSearch.vue';
 import Test from '@/components/Lecture/LectureTest/TestVerStd/TestVerStdMain/Test.vue';
+import TestInfo from '@/components/Lecture/LectureTest/TestInfo/TestInfoMain/TestInfoMain.vue';
 import { useUserInfo } from '@/stores/loginInfoState';
 
 const { user } = useUserInfo();
@@ -10,4 +11,5 @@ const { user } = useUserInfo();
   <ContentBox>시험 정보</ContentBox>
   <TestSearch />
   <Test v-if="user.userType === 'S'" />
+  <TestInfo v-else />
 </template>

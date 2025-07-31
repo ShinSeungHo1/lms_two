@@ -129,6 +129,11 @@ const router = createRouter({
               name: 'test',
               component: Test,
             },
+            {
+              path: 'test-info',
+              name: 'test-info',
+              component: Test,
+            },
           ],
         },
         {

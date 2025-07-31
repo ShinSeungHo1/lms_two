@@ -1,0 +1,287 @@
+/* 테스트 정보 테이블 컨테이너 */
+.test-info-table-container {
+  width: 87.5%; /* test-search-container와 동일한 너비 */
+  margin: 20px auto;
+  background-color: #fff;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+/* 테이블 기본 스타일 */
+.test-info-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* 테이블 헤더 */
+.test-info-table-head {
+  background: linear-gradient(135deg, #8e9aaf 0%, #6c7b95 100%);
+}
+
+.test-info-table-head-row {
+  border: none;
+}
+
+.test-info-table-head-cell {
+  padding: 16px 12px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  border: none;
+  position: relative;
+}
+
+.test-info-table-head-cell:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 20%;
+  height: 60%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* 테이블 바디 */
+.test-info-table-body {
+  background: #fff;
+}
+
+.test-info-table-body-row {
+  border-bottom: 1px solid #e9ecef;
+  transition: all 0.2s ease;
+}
+
+.test-info-table-body-row:hover {
+  background: linear-gradient(90deg, #f8f9fa 0%, #f1f3f4 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.test-info-table-body-row:last-child {
+  border-bottom: none;
+}
+
+.test-info-table-body-cell {
+  padding: 16px 12px;
+  text-align: center;
+  font-size: 14px;
+  color: #495057;
+  border: none;
+  vertical-align: middle;
+  position: relative;
+}
+
+/* 강의명 셀 특별 스타일 (클릭 가능) */
+.test-info-table-body-cell:first-child {
+  font-weight: 600;
+  color: #74b9ff;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.test-info-table-body-cell:first-child:hover {
+  color: #0984e3;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: #a2d2ff;
+}
+
+.test-info-table-body-cell:first-child::before {
+  content: '📚';
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+/* 시험문제보기 버튼 */
+.test-info-btn {
+  background-color: #74b9ff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(116, 185, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  min-width: 120px;
+}
+
+.test-info-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.test-info-btn:hover::before {
+  left: 100%;
+}
+
+.test-info-btn:hover {
+  background-color: #0984e3;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(116, 185, 255, 0.3);
+}
+
+.test-info-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(116, 185, 255, 0.2);
+}
+
+.test-info-btn::after {
+  content: '📋';
+  margin-left: 6px;
+  font-size: 12px;
+}
+
+/* 날짜 셀 스타일링 */
+.test-info-table-body-cell:nth-child(4),
+.test-info-table-body-cell:nth-child(5),
+.test-info-table-body-cell:nth-child(6) {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  color: #6c757d;
+  background: #f8f9fa;
+  border-radius: 4px;
+  margin: 2px;
+  font-weight: 500;
+}
+
+/* 강사명 스타일 */
+.test-info-table-body-cell:nth-child(2) {
+  font-weight: 500;
+  color: #8e9aaf;
+}
+
+/* 강의실 스타일 */
+.test-info-table-body-cell:nth-child(3) {
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.test-info-table-body-cell:nth-child(3)::before {
+  content: '🏫';
+  margin-right: 6px;
+  font-size: 14px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1200px) {
+  .test-info-table-container {
+    width: 95%;
+  }
+
+  .test-info-table-head-cell,
+  .test-info-table-body-cell {
+    padding: 14px 10px;
+    font-size: 13px;
+  }
+
+  .test-info-btn {
+    padding: 8px 16px;
+    font-size: 13px;
+    min-width: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .test-info-table-container {
+    width: 98%;
+    margin: 15px auto;
+  }
+
+  .test-info-table-head-cell,
+  .test-info-table-body-cell {
+    padding: 12px 8px;
+    font-size: 12px;
+  }
+
+  .test-info-btn {
+    padding: 8px 12px;
+    font-size: 12px;
+    min-width: 80px;
+  }
+
+  /* 모바일에서 일부 컬럼 숨기기 옵션 */
+  .test-info-table-body-cell:nth-child(3),
+  .test-info-table-head-cell:nth-child(3) {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .test-info-table-container {
+    margin: 10px auto;
+  }
+
+  .test-info-table-head-cell,
+  .test-info-table-body-cell {
+    padding: 10px 6px;
+    font-size: 11px;
+  }
+
+  .test-info-btn {
+    padding: 6px 10px;
+    font-size: 11px;
+    min-width: 70px;
+  }
+
+  /* 추가 컬럼 숨기기 */
+  .test-info-table-body-cell:nth-child(6),
+  .test-info-table-head-cell:nth-child(6) {
+    display: none;
+  }
+}
+
+/* 인터랙션 개선 */
+.test-info-table-body-row:hover .test-info-btn {
+  background-color: #0984e3;
+  transform: translateY(-1px);
+}
+
+/* 포커스 스타일 */
+.test-info-btn:focus {
+  outline: 2px solid #74b9ff;
+  outline-offset: 2px;
+}
+
+.test-info-table-body-cell:first-child:focus {
+  outline: 2px solid #74b9ff;
+  outline-offset: -2px;
+  border-radius: 4px;
+}
+
+/* 접근성 개선 */
+@media (prefers-reduced-motion: reduce) {
+  .test-info-table-container *,
+  .test-info-table-container *::before,
+  .test-info-table-container *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 테이블 스크롤 (작은 화면에서) */
+@media (max-width: 600px) {
+  .test-info-table-container {
+    overflow-x: auto;
+  }
+
+  .test-info-table {
+    min-width: 600px;
+  }
+}

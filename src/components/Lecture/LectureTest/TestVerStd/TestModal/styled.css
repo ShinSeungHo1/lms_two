@@ -1,0 +1,333 @@
+/* 모달 백드롭 */
+.test-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+/* 모달 컨텐츠 */
+.test-modal-content {
+  background: white;
+  border-radius: 16px;
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  max-width: 800px;
+  width: 90%;
+  max-height: 80vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 모달 타이틀 컨테이너 */
+.test-modal-title-container {
+  padding: 24px 32px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.test-modal-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.clost-test-modal-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  font-size: 20px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.clost-test-modal-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* 시험 결과 정보 컨테이너 */
+.test-result-info-container {
+  padding: 24px 32px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.test-result-info-content {
+  margin-bottom: 32px;
+}
+
+.test-result-head-label {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 16px;
+}
+
+/* 시험 결과 리스트 */
+.test-result-info-list {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 0;
+}
+
+.test-result-info-list dt {
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.test-result-info-list dd {
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 16px 0;
+  font-size: 16px;
+}
+
+.test-result-info-list dd:last-child {
+  margin-bottom: 0;
+}
+
+/* 문제 컬렉션 컨테이너 */
+.test-question-collect-container {
+  margin-bottom: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+}
+
+.test-question-collect-container:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.test-question-collect-label {
+  padding: 20px 24px;
+  background: #ffffff;
+  cursor: pointer;
+  font-weight: 500;
+  color: #1f2937;
+  border-bottom: 1px solid #e5e7eb;
+  transition: background-color 0.2s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.test-question-collect-label:hover {
+  background: #f9fafb;
+}
+
+.test-question-collect-label::after {
+  content: '▼';
+  font-size: 12px;
+  color: #6b7280;
+  transition: transform 0.2s;
+}
+
+.test-question-collect-container.expanded .test-question-collect-label::after {
+  transform: rotate(180deg);
+}
+
+/* 문제 예시 컨테이너 */
+.test-question-example-container {
+  padding: 24px;
+  background: #fafbfc;
+}
+
+.test-qeustion-example-options {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.test-qeustion-example-options > div {
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.test-qeustion-example-options > div:last-child {
+  margin-bottom: 0;
+}
+
+.test-qeustion-example-options input[type='radio'] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.test-qeustion-example-options label {
+  display: block;
+  padding: 16px 20px;
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+  color: #374151;
+  position: relative;
+  padding-left: 50px;
+}
+
+.test-qeustion-example-options label::before {
+  content: '';
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border: 2px solid #d1d5db;
+  border-radius: 50%;
+  background: white;
+  transition: all 0.2s;
+}
+
+.test-qeustion-example-options input[type='radio']:checked + label::before {
+  border-color: #3b82f6;
+  background: #3b82f6;
+}
+
+.test-qeustion-example-options input[type='radio']:checked + label::after {
+  content: '';
+  position: absolute;
+  left: 21px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+
+.test-qeustion-example-options label:hover {
+  border-color: #3b82f6;
+  background: #f0f7ff;
+}
+
+/* 정답/오답 표시 */
+.test-qeustion-example-options label span {
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+/* Disabled 상태 스타일 */
+.test-qeustion-example-options input[type='radio']:disabled + label {
+  background: #f3f4f6;
+  color: #9ca3af;
+  border-color: #e5e7eb;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.test-qeustion-example-options input[type='radio']:disabled + label:hover {
+  background: #f3f4f6;
+  border-color: #e5e7eb;
+  transform: none;
+}
+
+.test-qeustion-example-options input[type='radio']:disabled + label::before {
+  border-color: #d1d5db;
+  background: #f9fafb;
+}
+
+.test-qeustion-example-options input[type='radio']:disabled:checked + label::before {
+  border-color: #9ca3af;
+  background: #9ca3af;
+}
+
+.test-qeustion-example-options input[type='radio']:disabled:checked + label::after {
+  background: #f3f4f6;
+}
+
+/* 버튼 컨테이너 */
+.test-btn-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.test-submit-container,
+.test-cancel-btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  font-size: 14px;
+}
+
+.test-submit-container {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.test-submit-container:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.test-cancel-btn {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.test-cancel-btn:hover {
+  background: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .test-modal-content {
+    width: 95%;
+    max-height: 90vh;
+  }
+
+  .test-modal-title-container,
+  .test-result-info-container {
+    padding: 16px 20px;
+  }
+
+  .test-question-collect-label {
+    padding: 16px 20px;
+    font-size: 14px;
+  }
+
+  .test-question-example-container {
+    padding: 16px;
+  }
+
+  .test-qeustion-example-options label {
+    padding: 12px 16px;
+    padding-left: 45px;
+    font-size: 14px;
+  }
+}

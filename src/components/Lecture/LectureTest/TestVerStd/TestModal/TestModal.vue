@@ -1,7 +1,7 @@
 <script setup>
 import { useModalState } from '@/stores/modalState';
 import axios from 'axios';
-import { ElMessage } from 'element-plus';
+import { ElMessage, ElMessageBox } from 'element-plus';
 import { computed, onMounted, ref } from 'vue';
 
 const props = defineProps({
@@ -19,15 +19,37 @@ const props = defineProps({
   },
 });
 
+const emits = defineEmits(['success']);
+
 const modalState = useModalState();
 const scoreVariable = ref({});
 const questionVariable = ref({});
 const questionList = ref([]);
 
-const isToggle = ref(false);
+const testQuestionInfoDetail = ref([]);
+const testQuestionOptionInfoDetail = ref([]);
+const testQuestionAnswerInfoDetail = ref([]);
+const testSubmitOptionDetail = ref([]);
+const testResultInfoValue = ref({});
 
-const changeToggle = () => {
-  isToggle.value = !isToggle.value;
+const expandedQuestions = ref([]);
+const showBtnSubmitTest = ref(false);
+const isDisabledRadio = ref(false);
+
+const emitsAndModalClose = (emit) => {
+  emits(emit);
+  modalState.$patch({ isOpen: false });
+};
+
+const toggleExpandedQuestions = (index) => {
+  const expandedIndex = expandedQuestions.value.indexOf(index);
+  if (expandedIndex > -1) {
+    // 이미 열려있으면 → 닫기
+    expandedQuestions.value.splice(expandedIndex, 1);
+  } else {
+    // 닫혀있으면 → 열기
+    expandedQuestions.value.push(index);
+  }
 };
 
 const searchTestResultDetail = () => {
@@ -46,18 +68,22 @@ const searchTestResultDetail = () => {
 const testExample = (urlParam) => {
   axios.post('/api/lecture/testQuestionNOptionInfoDetail.do', urlParam).then((res) => {
     console.log(res);
-    const testQuestionInfoDetail = res.data.testQuestionInfoDetail;
-    const testQuestionOptionInfoDetail = res.data.testQuestionOptionInfoDetail;
-    const testSubmitOptionDetail = res.data.testSubmitOptionDetail;
+    testQuestionInfoDetail.value = res.data.testQuestionInfoDetail;
+    testQuestionOptionInfoDetail.value = res.data.testQuestionOptionInfoDetail;
+    testSubmitOptionDetail.value = res.data.testSubmitOptionDetail;
 
-    if (testQuestionInfoDetail.length === 0 && testQuestionOptionInfoDetail.length === 0) {
+    if (
+      testQuestionInfoDetail.value.length === 0 &&
+      testQuestionOptionInfoDetail.value.length === 0
+    ) {
       ElMessage.error('문제가 아직 출제되지 않았습니다.');
       return;
     }
 
-    const isSubmitted = Array.isArray(testSubmitOptionDetail) && testSubmitOptionDetail.length > 0;
+    const isSubmitted =
+      Array.isArray(testSubmitOptionDetail.value) && testSubmitOptionDetail.value.length > 0;
 
-    testQuestionInfoDetail.forEach((question) => {
+    testQuestionInfoDetail.value.forEach((question) => {
       const questionId = question.questionId;
       const variable = {};
       variable.questionId = question.questionId;
@@ -65,7 +91,7 @@ const testExample = (urlParam) => {
       variable.questionContent = question.questionContent;
       variable.questionScore = question.questionScore;
 
-      const options = testQuestionOptionInfoDetail.filter((option) => {
+      const options = testQuestionOptionInfoDetail.value.filter((option) => {
         return option.questionId === questionId;
       });
 
@@ -79,33 +105,40 @@ const testExample = (urlParam) => {
         let isDisabled = false;
 
         if (isSubmitted) {
-          const submitted = testSubmitOptionDetail.find((submit) => {
-            return submit.questionId === questionId && submit.optionID === option.optionId;
+          const submitted = testSubmitOptionDetail.value.find((submit) => {
+            return submit.questionId === questionId && submit.optionId === option.optionId;
           });
+          console.log('disabled false');
           if (submitted) {
             isChecked = true;
             isDisabled = true;
-          }
-        } else {
-          const otherSubmitted = testSubmitOptionDetail.find((submit) => {
-            return submit.questionId === questionId;
-          });
+          } else {
+            const otherSubmitted = testSubmitOptionDetail.value.find((submit) => {
+              return submit.questionId === questionId;
+            });
 
-          if (otherSubmitted) {
-            isDisabled = true;
+            if (otherSubmitted) {
+              isDisabled = true;
+            }
           }
         }
+        showBtnSubmitTest.value = true;
 
+        if (isDisabled) {
+          isDisabledRadio.value = true;
+        }
+        console.log(isDisabledRadio.value);
+        option.isDisabled = isDisabled;
         option.inputName = inputName;
         option.inputId = inputId;
         option.isChecked = isChecked;
-        option.isDisabled = isDisabled;
         option.optionNumber = optionNumber;
-
         variable.options.push(option);
       });
+
       questionVariable.value = variable;
       questionList.value.push(questionVariable.value);
+      console.log(questionList.value);
     });
   });
 };
@@ -113,32 +146,32 @@ const testExample = (urlParam) => {
 const testResult = (urlParam) => {
   axios.post('/api/lecture/testTakeSubmitResultDetail.do', urlParam).then((res) => {
     console.log(res);
-    const testQuestionInfoDetail = res.data.testQuestionInfoDetail;
-    const testQuestionOptionInfoDetail = res.data.testQuestionOptionInfoDetail;
-    const testQuestionAnswerInfoDetail = res.data.testQuestionAnswerInfoDetail;
-    const testSubmitOptionDetail = res.data.testSubmitOptionDetailValue;
-    const testResultInfoValue = res.data.testResultInfoValue;
+    testQuestionInfoDetail.value = res.data.testQuestionInfoDetail;
+    testQuestionOptionInfoDetail.value = res.data.testQuestionOptionInfoDetail;
+    testQuestionAnswerInfoDetail.value = res.data.testQuestionAnswerInfoDetail;
+    testSubmitOptionDetail.value = res.data.testSubmitOptionDetailValue;
+    testResultInfoValue.value = res.data.testResultInfoValue;
 
-    const testScore = testResultInfoValue.testScore || 0;
-    const resultDate = testResultInfoValue.testResultRegDate.split('.')[0] || '정보 없음';
-    const questionCount = testQuestionInfoDetail.length;
+    const testScore = testResultInfoValue.value.testScore || 0;
+    const resultDate = testResultInfoValue.value.testResultRegDate.split('.')[0] || '정보 없음';
+    const questionCount = testQuestionInfoDetail.value.length;
 
     let totalScore = 0;
 
-    testQuestionInfoDetail.forEach((question) => (totalScore += question.questionScore || 0));
+    testQuestionInfoDetail.value.forEach((question) => (totalScore += question.questionScore || 0));
 
     console.log('총점 : ', totalScore);
 
     let correctAnswerCount = 0;
-    testQuestionInfoDetail.forEach((question) => {
+    testQuestionInfoDetail.value.forEach((question) => {
       const questionId = question.questionId;
-      const correctAnswer = testQuestionAnswerInfoDetail.find((answer) => {
+      const correctAnswer = testQuestionAnswerInfoDetail.value.find((answer) => {
         return answer.questionId === questionId;
       });
 
       const correctOptionId = correctAnswer ? correctAnswer.correctOptionId : null;
 
-      const submittedAnswer = testSubmitOptionDetail.find((submit) => {
+      const submittedAnswer = testSubmitOptionDetail.value.find((submit) => {
         return submit.questionId === questionId;
       });
 
@@ -157,9 +190,10 @@ const testResult = (urlParam) => {
 
     scoreVariable.value = variable;
 
-    const isSubmitted = Array.isArray(testSubmitOptionDetail) && testSubmitOptionDetail.length > 0;
+    const isSubmitted =
+      Array.isArray(testSubmitOptionDetail.value) && testSubmitOptionDetail.value.length > 0;
 
-    testQuestionInfoDetail.forEach((question) => {
+    testQuestionInfoDetail.value.forEach((question) => {
       const questionId = question.questionId;
       const variable = {};
       variable.questionId = question.questionId;
@@ -167,17 +201,17 @@ const testResult = (urlParam) => {
       variable.questionContent = question.questionContent;
       variable.questionScore = question.questionScore;
 
-      const options = testQuestionOptionInfoDetail.filter((option) => {
+      const options = testQuestionOptionInfoDetail.value.filter((option) => {
         return option.questionId === questionId;
       });
 
-      const correctAnswer = testQuestionAnswerInfoDetail.find((answer) => {
+      const correctAnswer = testQuestionAnswerInfoDetail.value.find((answer) => {
         return answer.questionId === questionId;
       });
 
       const correctOptionId = correctAnswer ? correctAnswer.correctOptionId : null;
 
-      const submittedAnswer = testSubmitOptionDetail.find((submit) => {
+      const submittedAnswer = testSubmitOptionDetail.value.find((submit) => {
         return submit.questionId === questionId;
       });
 
@@ -195,13 +229,17 @@ const testResult = (urlParam) => {
           isChecked = submittedOptionId === option.optionId;
           isDisabled = true;
         } else {
-          const otherSubmitted = testSubmitOptionDetail.find((submit) => {
+          const otherSubmitted = testSubmitOptionDetail.value.find((submit) => {
             return submit.questionId === questionId;
           });
 
           if (otherSubmitted) {
             isDisabled = true;
           }
+        }
+
+        if (isDisabled) {
+          isDisabledRadio.value = true;
         }
 
         const isCorrect = submittedOptionId === correctOptionId;
@@ -255,57 +293,166 @@ const testResult = (urlParam) => {
   });
 };
 
+const submitTest = () => {
+  const answers = [];
+  const unAnsweredNumbers = [];
+  const submitDate = getCurrentDateTime();
+  const hasUnAnswered = ref(false);
+
+  questionList.value.forEach((question, index) => {
+    const questionNumber = question.questionNumber || index + 1;
+
+    const selectedOption = question.options.find((option) => option.isChecked);
+
+    if (!selectedOption) {
+      hasUnAnswered.value = true;
+      unAnsweredNumbers.push(`${questionNumber}번`);
+    } else {
+      console.log(selectedOption);
+      answers.push({
+        questionId: question.questionId,
+        testId: selectedOption.testId,
+        lecId: selectedOption.lecId,
+        optionId: selectedOption.optionId,
+        studentId: props.studentId,
+        submitDate: submitDate,
+      });
+    }
+  });
+
+  console.log(answers);
+  if (unAnsweredNumbers.length > 0) {
+    ElMessage.error(`다음 문항에 답변하지 않았습니다:\n• ${unAnsweredNumbers.join(',')}`);
+    return;
+  }
+
+  ElMessageBox.confirm('정말로 시험을 제출하시겠습니까?', {
+    confirmButtonText: '네!!',
+    cancelButtonText: '아니요!!',
+    type: 'warning',
+  })
+    .then(() => {
+      const param = {
+        answers: answers,
+        testId: props.testId,
+        lecId: props.lecId,
+        studentId: props.studentId,
+        submitDate: submitDate,
+      };
+
+      axios
+        .post('/api/lecture/testTakeSubmit.do', param)
+        .then((res) => {
+          if (res.data.result === 'success') {
+            ElMessage.success('시험이 성공적으로 제출되었습니다.');
+            emitsAndModalClose('success');
+          } else if (res.data.result === 'isExist') {
+            ElMessage.error('이미 제출된 시험입니다.');
+            emitsAndModalClose('success');
+          } else {
+            ElMessage.error('다시 시도해 주세요');
+          }
+        })
+        .catch((err) => {
+          ElMessage.error('서버 오류 발생');
+          console.log('시험 제출 서버 오류 발생 err : ', err);
+        });
+    })
+    .catch(() => {
+      return;
+    });
+};
+
+const pickAnswer = (questionId, optionId) => {
+  questionList.value.forEach((question) => {
+    if (question.questionId === questionId) {
+      question.options.forEach((option) => {
+        option.isChecked = option.optionId === optionId;
+      });
+    }
+  });
+};
+
+const getCurrentDateTime = () => {
+  const now = new Date();
+  const yyyy = now.getFullYear();
+  const mm = ('0' + (now.getMonth() + 1)).slice(-2);
+  const dd = ('0' + now.getDate()).slice(-2);
+  const hh = ('0' + now.getHours()).slice(-2);
+  const min = ('0' + now.getMinutes()).slice(-2);
+  return `${yyyy}-${mm}-${dd} ${hh}:${min}:00`;
+};
+
+const exitModal = () => {
+  modalState.$patch({ isOpen: false });
+};
+
 onMounted(() => {
   searchTestResultDetail();
 });
 </script>
 <template>
-  <div class="test-result-info-container">
-    <div v-if="modalState.payload" class="test-result-info-content">
-      <div class="test-result-head-label">시험 결과</div>
-      <dl class="test-result-info-list">
-        <dt>채점 문제수/채점 점수</dt>
-        <dd>
-          {{
-            `${scoreVariable.correctAnswerCount}/${scoreVariable.questionCount}(${scoreVariable.testScore}/${scoreVariable.totalScore}점)`
-          }}
-        </dd>
-
-        <dt>전체 문제 수</dt>
-        <dd>{{ scoreVariable.questionCount }}</dd>
-
-        <dt>시험 제출일</dt>
-        <dd>{{ scoreVariable.resultDate }}</dd>
-      </dl>
-    </div>
-    <div
-      v-for="(question, index) in questionList"
-      :key="`q-${index}`"
-      class="test-question-collect-container"
-    >
-      <div class="test-question-collect-label" @click="changeToggle">
-        {{
-          `Q${question.questionNumber}. ${question.questionContent} (${question.questionScore}점)`
-        }}
+  <div class="test-modal-backdrop">
+    <div class="test-modal-content">
+      <div class="test-modal-title-container">
+        <div class="test-modal-title">시험 응시</div>
+        <button class="clost-test-modal-btn" @click="exitModal">x</button>
       </div>
-      <div v-if="isToggle" class="test-question-example-container">
-        <fieldset class="test-qeustion-example-options">
-          <div v-for="(option, idx) in question.options" :key="`opt-${idx}`">
-            <input
-              :id="option.inputId"
-              :name="option.inputName"
-              :value="option.optionId"
-              :checked="option.isChecked"
-              :disabled="option.isDisabled"
-              type="radio"
-            />
-            <label :for="option.inputId" :style="option.backGround"
-              >{{ `${option.optionNumber}. ${option.optionContent}` }}
-              <span v-if="option.correctAnswer === 'correct'" style="color: green">(정답)</span>
-              <span v-if="option.correctAnswer === 'uncorrect'" style="color: red">(오답)</span>
-            </label>
+      <div class="test-result-info-container">
+        <div v-if="modalState.payload" class="test-result-info-content">
+          <div class="test-result-head-label">시험 결과</div>
+          <dl class="test-result-info-list">
+            <dt>채점 문제수/채점 점수</dt>
+            <dd>
+              {{
+                `${scoreVariable.correctAnswerCount}/${scoreVariable.questionCount}(${scoreVariable.testScore}/${scoreVariable.totalScore}점)`
+              }}
+            </dd>
+
+            <dt>전체 문제 수</dt>
+            <dd>{{ scoreVariable.questionCount }}</dd>
+
+            <dt>시험 제출일</dt>
+            <dd>{{ scoreVariable.resultDate }}</dd>
+          </dl>
+        </div>
+        <div
+          v-for="(question, index) in questionList"
+          :key="`q-${index}`"
+          class="test-question-collect-container"
+        >
+          <div class="test-question-collect-label" @click="toggleExpandedQuestions(index)">
+            {{
+              `Q${question.questionNumber}. ${question.questionContent} (${question.questionScore}점)`
+            }}
           </div>
-        </fieldset>
+          <div v-if="expandedQuestions.includes(index)" class="test-question-example-container">
+            <fieldset class="test-qeustion-example-options">
+              <div v-for="(option, idx) in question.options" :key="`opt-${idx}`">
+                <input
+                  :id="option.inputId"
+                  :name="option.inputName"
+                  :value="option.optionId"
+                  :checked="option.isChecked"
+                  :disabled="isDisabledRadio"
+                  type="radio"
+                  @change="pickAnswer(question.questionId, option.optionId)"
+                />
+                <label :for="option.inputId" :style="option.backGround"
+                  >{{ `${option.optionNumber}. ${option.optionContent}` }}
+                  <span v-if="option.correctAnswer === 'correct'" style="color: green">(정답)</span>
+                  <span v-if="option.correctAnswer === 'uncorrect'" style="color: red">(오답)</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <div class="test-btn-container">
+          <button v-if="showBtnSubmitTest" class="test-submit-container" @click="submitTest">
+            제출
+          </button>
+          <button class="test-cancel-btn" @click="exitModal">취소</button>
+        </div>
       </div>
     </div>
   </div>
